@@ -1,12 +1,10 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
-// import { Container } from './styles';
+import Footer from '../../componentes/Footer';
 
 function ExploreDrinkIgrendient() {
   return (
     <div>
-      <h1>Explore Drink Igrendient</h1>
-      <Button>Ola</Button>
+      <Footer />
     </div>
   );
 }
