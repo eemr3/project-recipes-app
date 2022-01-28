@@ -1,0 +1,11 @@
+.meunu-inferior {
+  background-color: rgb(235, 195, 64);
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  margin-top: 1rem;
+  padding: 1rem;
+  position: fixed;
+  width: 100%;
+}
