@@ -1,10 +1,11 @@
 import React from 'react';
-
+import Header from '../../componentes/header/Header';
 // import { Container } from './styles';
 
 function FavoriteRecipes() {
   return (
     <div>
+      <Header name="Favorite Recipes" enableSearch={ false } />
       <h1>Favorite Recipes</h1>
     </div>
   );
