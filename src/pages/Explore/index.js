@@ -1,10 +1,13 @@
 import React from 'react';
-
+import Header from '../../componentes/header/Header';
 // import { Container } from './styles';
 
 function Explore() {
   return (
-    <div><h1>Explore</h1></div>
+    <div>
+      <Header name="Explore" enableSearch={ false } />
+      <h1>Explore</h1>
+    </div>
   );
 }
 
