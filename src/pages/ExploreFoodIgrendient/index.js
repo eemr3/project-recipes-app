@@ -1,11 +1,10 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import Footer from '../../componentes/Footer';
 
 function ExploreFoodIgrendient() {
   return (
     <div>
-      <h1>Explore Food Igrendient</h1>
+      <Footer />
     </div>
   );
 }

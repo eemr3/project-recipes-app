@@ -1,10 +1,11 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import Footer from '../../componentes/Footer';
 
 function ExploreDrink() {
   return (
-    <div><h1>Explore Drink</h1></div>
+    <div>
+      <Footer />
+    </div>
   );
 }
 
