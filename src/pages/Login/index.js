@@ -1,36 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { useHistory } from 'react-router-dom';
+
 // import AppContext from '../../context/AppContext';
-import { setCocktailsTokenInStorage,
-  setEmailInStorage,
-  setMealsTokenInStorage } from '../../services/localStoreageData';
 
 import './Login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const history = useHistory();
-
-  const validateForm = () => {
-    const passwordLength = 6;
-    const validateEmail = /\S+@\S+\.\S+/; /* Regex de validação de e-mail retirado do
-                                              https://qastack.com.br/programming/46155/how-to-validate-an-email-address-in-javascript
-                                              Autor: — C. Lee
-                                          */
-    return validateEmail.test(email) && password.length > passwordLength;
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setEmailInStorage(email);
-    setMealsTokenInStorage(1);
-    setCocktailsTokenInStorage(1);
-    history.push('/foods');
-  };
-
   return (
     <div className="Login">
       <Form onSubmit={ handleSubmit }>
