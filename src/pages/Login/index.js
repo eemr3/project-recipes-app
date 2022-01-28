@@ -10,6 +10,16 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const validateForm = () => {
+    const passwordLength = 6;
+    /* Regex de validação de e-mail retirado do
+      https://qastack.com.br/programming/46155/how-to-validate-an-email-address-in-javascript
+      Autor: — C. Lee
+    */
+    const validateEmail = /\S+@\S+\.\S+/;
+    return validateEmail.test(email) && password.length > passwordLength;
+  };
+
   return (
     <div className="Login">
       <Form onSubmit={ () => {} }>
@@ -41,6 +51,7 @@ function Login() {
           block
           size="lg"
           type="submit"
+          disabled={ !validateForm() }
         >
           Login
         </Button>
