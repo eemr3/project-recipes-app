@@ -1,20 +1,71 @@
-import React, { useContext } from 'react';
-import AppContext from '../../context/AppContext';
-import rockGlass from '../../images/rockGlass.svg';
+import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
+// import AppContext from '../../context/AppContext';
+import { setCocktailsTokenInStorage,
+  setEmailInStorage,
+  setMealsTokenInStorage } from '../../services/localStoreageData';
+
+import './Login.css';
 
 function Login() {
-  const teste = useContext(AppContext);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const history = useHistory();
+
+  const validateForm = () => {
+    const passwordLength = 6;
+    const validateEmail = /\S+@\S+\.\S+/; /* Regex de validação de e-mail retirado do
+                                              https://qastack.com.br/programming/46155/how-to-validate-an-email-address-in-javascript
+                                              Autor: — C. Lee
+                                          */
+    return validateEmail.test(email) && password.length > passwordLength;
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setEmailInStorage(email);
+    setMealsTokenInStorage(1);
+    setCocktailsTokenInStorage(1);
+    history.push('/foods');
+  };
+
   return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-      {teste}
+    <div className="Login">
+      <Form onSubmit={ handleSubmit }>
+        <Form.Group size="lg" controlId="email">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            data-testid="email-input"
+            autoFocus
+            name="email"
+            type="email"
+            value={ email }
+            onChange={ (event) => setEmail(event.target.value) }
+          />
+        </Form.Group>
+        <Form.Group size="lg" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            data-testid="password-input"
+            name="password"
+            type="password"
+            value={ password }
+            onChange={ (event) => setPassword(event.target.value) }
+          />
+        </Form.Group>
+        <Button
+          data-testid="login-submit-btn"
+          variant="dark"
+          block
+          size="lg"
+          type="submit"
+          disabled={ !validateForm() }
+        >
+          Login
+        </Button>
+      </Form>
     </div>
   );
 }
