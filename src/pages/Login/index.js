@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {
   setCocktailsTokenInStorage,
+  setEmailInStorage,
   setMealsTokenInStorage,
 } from '../../services/localStoreageData';
 
@@ -28,6 +29,7 @@ function Login() {
     event.preventDefault();
     setMealsTokenInStorage(1);
     setCocktailsTokenInStorage(1);
+    setEmailInStorage(email);
   };
 
   return (
