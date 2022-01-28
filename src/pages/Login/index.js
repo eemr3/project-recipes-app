@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import {
+  setCocktailsTokenInStorage,
+  setMealsTokenInStorage,
+} from '../../services/localStoreageData';
 
 // import AppContext from '../../context/AppContext';
 
@@ -20,9 +24,15 @@ function Login() {
     return validateEmail.test(email) && password.length > passwordLength;
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setMealsTokenInStorage(1);
+    setCocktailsTokenInStorage(1);
+  };
+
   return (
     <div className="Login">
-      <Form onSubmit={ () => {} }>
+      <Form onSubmit={ handleSubmit }>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
