@@ -6,7 +6,7 @@ import Header from '../../componentes/header/Header';
 function ExploreDrinkIgrendient() {
   return (
     <div>
-      <Header name="Explore Drink Igrendient" enableSearch={ false } />
+      <Header name="Explore Ingredients" enableSearch={ false } />
       <h1>Explore Drink Igrendient</h1>
       <Button>Ola</Button>
     </div>

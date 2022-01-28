@@ -6,8 +6,8 @@ import Header from '../../componentes/header/Header';
 function ExploreFood() {
   return (
     <div>
-      <Header name="Explore Food" enableSearch={ false } />
-      <h1>Explore Food</h1>
+      <Header name="Explore Foods" enableSearch={ false } />
+      <h1>Explore Foods</h1>
     </div>
   );
 }
