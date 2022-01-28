@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {
@@ -12,6 +13,7 @@ import {
 import './Login.css';
 
 function Login() {
+  const history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -30,6 +32,7 @@ function Login() {
     setMealsTokenInStorage(1);
     setCocktailsTokenInStorage(1);
     setEmailInStorage(email);
+    history.push('/foods');
   };
 
   return (
