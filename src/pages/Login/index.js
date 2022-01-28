@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -7,9 +7,12 @@ import Button from 'react-bootstrap/Button';
 import './Login.css';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
     <div className="Login">
-      <Form onSubmit={ handleSubmit }>
+      <Form onSubmit={ () => {} }>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -37,7 +40,6 @@ function Login() {
           block
           size="lg"
           type="submit"
-          disabled={ !validateForm() }
         >
           Login
         </Button>
