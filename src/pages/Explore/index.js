@@ -1,10 +1,11 @@
 import React from 'react';
-
-// import { Container } from './styles';
+import Footer from '../../componentes/Footer';
 
 function Explore() {
   return (
-    <div><h1>Explore</h1></div>
+    <div>
+      <Footer />
+    </div>
   );
 }
 
