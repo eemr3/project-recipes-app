@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
+import SearchBarHeader from '../searchBarHeader/SearchBarHeader';
 
 function Header(props) {
   const { name, enableSearch } = props;
@@ -37,6 +38,8 @@ function Header(props) {
         ''
       )}
       {searchBar === 1 ? '' : <input type="text" data-testid="search-input" />}
+
+      <SearchBarHeader />
     </header>
   );
 }

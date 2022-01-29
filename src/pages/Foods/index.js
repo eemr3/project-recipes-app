@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../../componentes/header/Header';
-import Footer from '../../componentes/Footer';
+import Header from '../../components/header/Header';
+import Footer from '../../components/Footer';
 
 function Foods() {
   return (
