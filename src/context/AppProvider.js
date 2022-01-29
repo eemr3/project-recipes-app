@@ -17,6 +17,7 @@ const AppProvider = ({ children }) => {
   const handleArrayMeals = ({ meals }) => {
     setArrayMeals(meals);
   };
+
   return (
     <AppContext.Provider
       value={ {
@@ -26,6 +27,7 @@ const AppProvider = ({ children }) => {
         headerInputText,
         handleArrayMeals,
         arrayMeals,
+
       } }
     >
       {children}

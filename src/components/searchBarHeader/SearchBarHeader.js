@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { requestByRadioChoice } from '../../services/requestsApi';
 
@@ -8,28 +9,37 @@ export default function SearchBarHeader() {
     handleArrayMeals,
     handleSectedButton,
     selectedButton,
-    headerInputText } = useContext(AppContext);
+    headerInputText,
+  } = useContext(AppContext);
+
+  const [routeLocation, setRouteLocation] = useState('');
 
   const switchHandle = () => {
     switch (selectedButton) {
     case 'Ingredient':
-      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${headerInputText}`)
+      requestByRadioChoice(`https://www.${routeLocation}.com/api/json/v1/1/filter.php?i=${headerInputText}`)
         .then((data) => handleArrayMeals(data));
       break;
 
     case 'Name':
-      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/search.php?s=${headerInputText}`)
+      requestByRadioChoice(`https://www.${routeLocation}.com/api/json/v1/1/search.php?s=${headerInputText}`)
         .then((data) => handleArrayMeals(data));
       break;
 
     case 'First letter':
-      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/search.php?f=${headerInputText}`)
+      requestByRadioChoice(`https://www.${routeLocation}.com/api/json/v1/1/search.php?f=${headerInputText}`)
         .then((data) => handleArrayMeals(data));
       break;
     default:
       break;
     }
   };
+
+  const location = useLocation();
+  useEffect(() => (
+    location.pathname === '/drinks'
+      ? setRouteLocation('thecocktaildb') : setRouteLocation('themealdb')
+  ), []);
 
   const handleRequestApi = () => (
     selectedButton === 'First letter' && headerInputText.length > 1 ? (
