@@ -39,7 +39,7 @@ export default function SearchBarHeader() {
   useEffect(() => (
     location.pathname === '/drinks'
       ? setRouteLocation('thecocktaildb') : setRouteLocation('themealdb')
-  ), []);
+  ), [location]);
 
   const handleRequestApi = () => (
     selectedButton === 'First letter' && headerInputText.length > 1 ? (
