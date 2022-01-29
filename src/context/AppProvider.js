@@ -8,8 +8,26 @@ const AppProvider = ({ children }) => {
     setSelectedButton(id);
   };
 
+  const [headerInputText, setHeaderInputText] = useState('');
+  const handleInputHeader = (input) => {
+    setHeaderInputText(input);
+  };
+
+  const [arrayMeals, setArrayMeals] = useState();
+  const handleArrayMeals = ({ meals }) => {
+    setArrayMeals(meals);
+  };
   return (
-    <AppContext.Provider value={ { handleSectedButton, selectedButton } }>
+    <AppContext.Provider
+      value={ {
+        handleSectedButton,
+        selectedButton,
+        handleInputHeader,
+        headerInputText,
+        handleArrayMeals,
+        arrayMeals,
+      } }
+    >
       {children}
     </AppContext.Provider>
   );

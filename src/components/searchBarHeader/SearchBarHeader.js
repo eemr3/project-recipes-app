@@ -1,9 +1,43 @@
 import React, { useContext } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 import AppContext from '../../context/AppContext';
+import { requestByRadioChoice } from '../../services/requestsApi';
 
 export default function SearchBarHeader() {
-  const { handleSectedButton } = useContext(AppContext);
+  const {
+    handleArrayMeals,
+    handleSectedButton,
+    selectedButton,
+    headerInputText } = useContext(AppContext);
+
+  const switchHandle = () => {
+    switch (selectedButton) {
+    case 'Ingredient':
+      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${headerInputText}`)
+        .then((data) => handleArrayMeals(data));
+      break;
+
+    case 'Name':
+      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/search.php?s=${headerInputText}`)
+        .then((data) => handleArrayMeals(data));
+      break;
+
+    case 'First letter':
+      requestByRadioChoice(`https://www.themealdb.com/api/json/v1/1/search.php?f=${headerInputText}`)
+        .then((data) => handleArrayMeals(data));
+      break;
+    default:
+      break;
+    }
+  };
+
+  const handleRequestApi = () => (
+    selectedButton === 'First letter' && headerInputText.length > 1 ? (
+      global.alert('Your search must have only 1 (one) character')) : (
+      switchHandle()
+    )
+  );
+
   return (
     <Container>
       <Form>
@@ -40,6 +74,7 @@ export default function SearchBarHeader() {
               name="search-input"
               data-testid="exec-search-btn"
               variant="outline-dark"
+              onClick={ handleRequestApi }
             >
               Search
             </Button>
