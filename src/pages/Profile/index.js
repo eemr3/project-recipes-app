@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../../componentes/header/Header';
 // import { Container } from './styles';
 import Footer from '../../componentes/Footer';
 
 function Profile() {
   const [emailUser, setEmailUser] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     const email = localStorage.getItem('user');
     setEmailUser(JSON.parse(email));
   }, [setEmailUser]);
+
+  const clearLocalStorage = () => {
+    localStorage.clear();
+    history.push('/');
+  };
 
   return (
     <div>
@@ -25,7 +31,14 @@ function Profile() {
         <button type="button" data-testid="profile-favorite-btn">Favorite Recipes</button>
       </Link>
 
-      <button type="button" data-testid="profile-logout-btn">Logout</button>
+      <button
+        type="button"
+        data-testid="profile-logout-btn"
+        onClick={ clearLocalStorage }
+      >
+        Logout
+      </button>
+
       <Footer />
     </div>
   );
