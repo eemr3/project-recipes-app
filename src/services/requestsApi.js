@@ -23,8 +23,11 @@ export const requestAllDrinks = async () => {
   return object;
 };
 
-export const requestNationality = () => {
-  console.log('Requisição a Api dos Nacionalidade');
+export const requestAllNationality = async () => {
+  const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const response = await fetch(URL);
+  const object = await response.json();
+  return object;
 };
 
 export const requestCategories = () => {

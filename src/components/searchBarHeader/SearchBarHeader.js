@@ -16,7 +16,6 @@ export default function SearchBarHeader() {
   const [routeLocation, setRouteLocation] = useState('');
 
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => (
     location.pathname === '/drinks'
