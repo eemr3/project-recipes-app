@@ -37,6 +37,13 @@ export const requestAllIngredients = async (route) => {
   return object;
 };
 
+export const requestByIngredients = async (route, ingredient) => {
+  const URL = `https://www.${route}.com/api/json/v1/1/filter.php?i=${ingredient} `;
+
+  const response = await fetch(URL);
+  const object = await response.json();
+  return object;
+};
 export const requestCategories = () => {
   console.log('Requisição a Api dos Categorias');
 };
