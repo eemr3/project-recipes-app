@@ -30,6 +30,13 @@ export const requestAllNationality = async () => {
   return object;
 };
 
+export const requestAllIngredients = async (route) => {
+  const URL = `https://www.${route}.com/api/json/v1/1/list.php?i=list`;
+  const response = await fetch(URL);
+  const object = await response.json();
+  return object;
+};
+
 export const requestCategories = () => {
   console.log('Requisição a Api dos Categorias');
 };
