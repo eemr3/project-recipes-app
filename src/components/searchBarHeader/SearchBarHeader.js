@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { requestByRadioChoice } from '../../services/requestsApi';
 
@@ -10,11 +10,18 @@ export default function SearchBarHeader() {
     handleSectedButton,
     selectedButton,
     headerInputText,
-    arrayMeals,
 
   } = useContext(AppContext);
 
   const [routeLocation, setRouteLocation] = useState('');
+
+  const location = useLocation();
+  console.log(location);
+
+  useEffect(() => (
+    location.pathname === '/drinks'
+      ? setRouteLocation('thecocktaildb') : setRouteLocation('themealdb')
+  ), [location]);
 
   const switchHandle = () => {
     switch (selectedButton) {
@@ -36,20 +43,9 @@ export default function SearchBarHeader() {
       break;
     }
   };
-
-  const location = useLocation();
-  useEffect(() => (
-    location.pathname === '/drinks'
-      ? setRouteLocation('thecocktaildb') : setRouteLocation('themealdb')
-  ), [location]);
-
-  const history = useHistory();
   const handlefunction = () => {
     switchHandle();
-    return arrayMeals.length === 1
-    && history.push(`${location.pathname}/${arrayMeals[0].idMeal}`);
   };
-
   const handleRequestApi = () => (
     selectedButton === 'First letter' && headerInputText.length > 1 ? (
       global.alert('Your search must have only 1 (one) character')) : (

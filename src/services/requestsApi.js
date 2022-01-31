@@ -20,7 +20,7 @@ export const requestAllFoods = async () => {
 export const requestAllDrinks = async () => {
   const response = await fetch('https://thecocktaildb.com/api/json/v1/1/search.php?s=A');
   const object = await response.json();
-  return object.drinks;
+  return object;
 };
 
 export const requestNationality = () => {

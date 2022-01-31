@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import AppContext from '../../context/AppContext';
 import CardResults from '../../components/cardsResult/Card';
 /* import { requestAllFoods } from '../../services/requestsApi'; */
-
+const DOZE = 12;
 function Foods() {
   const { arrayMeals } = useContext(AppContext);
 
@@ -13,6 +13,7 @@ function Foods() {
       <Header name="Explore Foods" enableSearch />
       <h1>Foods</h1>
       {arrayMeals ? arrayMeals
+        .slice(0, DOZE)
         .map(({
           idMeal, strMealThumb, strMeal, strInstructions, index,
         }) => (<CardResults
