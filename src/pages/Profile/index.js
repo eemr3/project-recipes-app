@@ -15,6 +15,9 @@ function Profile() {
     <div>
       <Header name="Profile" enableSearch={ false } />
       <span data-testid="profile-email">{emailUser.email}</span>
+      <button type="button" data-testid="profile-done-btn">Done Recipes</button>
+      <button type="button" data-testid="profile-favorite-btn">Favorite Recipes</button>
+      <button type="button" data-testid="profile-logout-btn">Logout</button>
       <Footer />
     </div>
   );
