@@ -11,6 +11,7 @@ export default function SearchBarHeader() {
     selectedButton,
     headerInputText,
     arrayMeals,
+
   } = useContext(AppContext);
 
   const [routeLocation, setRouteLocation] = useState('');

@@ -14,9 +14,10 @@ const AppProvider = ({ children }) => {
   };
 
   const [arrayMeals, setArrayMeals] = useState();
-  const handleArrayMeals = ({ meals }) => {
-    setArrayMeals(meals);
-  };
+  const handleArrayMeals = ({ meals }) => (
+    meals ? setArrayMeals(meals) : global
+      .alert('Sorry, we haven\'t found any recipes for these filters.')
+  );
 
   return (
     <AppContext.Provider
@@ -27,7 +28,6 @@ const AppProvider = ({ children }) => {
         headerInputText,
         handleArrayMeals,
         arrayMeals,
-
       } }
     >
       {children}

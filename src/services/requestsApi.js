@@ -11,6 +11,18 @@ export const requestByRadioChoice = async (URL) => {
   }
 };
 
+export const requestAllFoods = async () => {
+  const response = await fetch('https://themealdb.com/api/json/v1/1/search.php?s=A');
+  const object = await response.json();
+  return object;
+};
+
+export const requestAllDrinks = async () => {
+  const response = await fetch('https://thecocktaildb.com/api/json/v1/1/search.php?s=A');
+  const object = await response.json();
+  return object.drinks;
+};
+
 export const requestNationality = () => {
   console.log('Requisição a Api dos Nacionalidade');
 };
