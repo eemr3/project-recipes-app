@@ -30,3 +30,9 @@ export const requestNationality = () => {
 export const requestCategories = () => {
   console.log('Requisição a Api dos Categorias');
 };
+
+export const requestSurprise = async (url) => {
+  const response = await fetch(url);
+  const object = await response.json();
+  return object;
+};
