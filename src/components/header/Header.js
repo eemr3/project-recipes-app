@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
+import SearchBarHeader from '../searchBarHeader/SearchBarHeader';
+import AppContext from '../../context/AppContext';
 
 function Header(props) {
   const { name, enableSearch } = props;
   const [searchBar, setsearchBar] = useState(1);
   const history = useHistory();
+
+  const { handleInputHeader, headerInputText } = useContext(AppContext);
 
   const handleClickProfile = () => {
     history.push('/profile');
@@ -36,7 +41,20 @@ function Header(props) {
       ) : (
         ''
       )}
-      {searchBar === 1 ? '' : <input type="text" data-testid="search-input" />}
+
+      {searchBar === 1 ? '' : (
+        <Container>
+          <input
+            onChange={ ({ target }) => handleInputHeader(target.value) }
+            value={ headerInputText }
+            type="text"
+            data-testid="search-input"
+          />
+          <SearchBarHeader />
+        </Container>
+
+      )}
+
     </header>
   );
 }

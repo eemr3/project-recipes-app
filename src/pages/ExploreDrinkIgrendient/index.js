@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Header from '../../componentes/header/Header';
+import Header from '../../components/header/Header';
 // import { Container } from './styles';
-import Footer from '../../componentes/Footer';
+import Footer from '../../components/Footer';
 
 function ExploreDrinkIgrendient() {
   return (
