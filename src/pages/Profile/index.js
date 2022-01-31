@@ -9,8 +9,7 @@ function Profile() {
   const history = useHistory();
 
   useEffect(() => {
-    const email = localStorage.getItem('user');
-    setEmailUser(JSON.parse(email));
+    setEmailUser(JSON.parse(localStorage.getItem('user')));
   }, [setEmailUser]);
 
   const clearLocalStorage = () => {
@@ -21,14 +20,21 @@ function Profile() {
   return (
     <div>
       <Header name="Profile" enableSearch={ false } />
-      <span data-testid="profile-email">{emailUser.email}</span>
+
+      {emailUser ? (
+        <span data-testid="profile-email">{emailUser.email}</span>
+      ) : null}
 
       <Link to="/done-recipes">
-        <button type="button" data-testid="profile-done-btn">Done Recipes</button>
+        <button type="button" data-testid="profile-done-btn">
+          Done Recipes
+        </button>
       </Link>
 
       <Link to="/favorite-recipes">
-        <button type="button" data-testid="profile-favorite-btn">Favorite Recipes</button>
+        <button type="button" data-testid="profile-favorite-btn">
+          Favorite Recipes
+        </button>
       </Link>
 
       <button
