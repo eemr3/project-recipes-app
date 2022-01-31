@@ -13,15 +13,14 @@ function Drinks() {
       <h1>Drinks</h1>
       {arrayMeals ? arrayMeals
         .slice(0, DOZE)
-        .map(({
-          idDrink, strDrinkThumb, strDrink, strInstructions, index,
-        }) => (<CardResults
-          key={ idDrink }
-          index={ index }
-          recipe={ strInstructions }
-          image={ strDrinkThumb }
-          name={ strDrink }
-        />)) : <h1>sem bebida pesquisada</h1>}
+        .map(({ idDrink, strDrinkThumb, strDrink, strInstructions }, index) => (
+          <CardResults
+            key={ idDrink }
+            index={ index }
+            recipe={ strInstructions }
+            image={ strDrinkThumb }
+            name={ strDrink }
+          />)) : <h1>sem bebida pesquisada</h1>}
       <Footer />
     </div>
   );
