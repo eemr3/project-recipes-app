@@ -10,7 +10,7 @@ function ExploreDrink() {
   const history = useHistory();
   const handleRequestSurprise = () => {
     requestSurprise(url).then((drink) => history
-      .push(`/drinks/${drink.drink[0].idDrink}`));
+      .push(`/drinks/${drink.drinks[0].idDrink}`));
   };
   return (
     <div>
