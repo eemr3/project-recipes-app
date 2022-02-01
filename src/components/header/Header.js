@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
 import SearchBarHeader from '../searchBarHeader/SearchBarHeader';
@@ -27,10 +27,10 @@ function Header(props) {
   };
 
   return (
-    <header>
-      <button onClick={ handleClickProfile } type="button">
+    <Container>
+      <Button onClick={ handleClickProfile } type="Button">
         <img src={ profile } alt="profile" data-testid="profile-top-btn" />
-      </button>
+      </Button>
 
       <span data-testid="page-title">{name}</span>
 
@@ -55,7 +55,7 @@ function Header(props) {
 
       )}
 
-    </header>
+    </Container>
   );
 }
 
