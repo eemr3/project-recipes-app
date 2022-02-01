@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Header from '../../componentes/header/Header';
+import Header from '../../components/header/Header';
 // import { Container } from './styles';
-import Footer from '../../componentes/Footer';
+import Footer from '../../components/Footer';
 
 function Profile() {
   const [emailUser, setEmailUser] = useState([]);

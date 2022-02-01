@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../../componentes/header/Header';
+import Header from '../../components/header/Header';
 // import { Container } from './styles';
-import Footer from '../../componentes/Footer';
+import Footer from '../../components/Footer';
 
 function Explore() {
   return (
