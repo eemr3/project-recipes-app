@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
+import { requestAllDrinks, requestAllFoods } from '../services/requestsApi';
 import { requestByIngredients } from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
@@ -14,7 +15,8 @@ const AppProvider = ({ children }) => {
   const handleInputHeader = (input) => {
     setHeaderInputText(input);
   };
-  const [arrayMeals, setArrayMeals] = useState();
+
+  const [arrayMeals, setArrayMeals] = useState([]);
   const history = useHistory();
   const location = useLocation();
 
@@ -61,6 +63,22 @@ const AppProvider = ({ children }) => {
     verifyerArrayMeals(value);
   };
 
+  useEffect(() => {
+    if (location.pathname === '/drinks') {
+      const getDrinksData = async () => {
+        const response = await requestAllDrinks();
+        setArrayMeals(response);
+      };
+      getDrinksData();
+    } else if (location.pathname === '/foods') {
+      const getMealsData = async () => {
+        const response = await requestAllFoods();
+        setArrayMeals(response.meals);
+      };
+      getMealsData();
+    }
+  }, [location.pathname]);
+
   return (
     <AppContext.Provider
       value={ {
@@ -70,6 +88,7 @@ const AppProvider = ({ children }) => {
         headerInputText,
         handleArrayMeals,
         arrayMeals,
+        setArrayMeals,
         handleIngredientsFilter,
       } }
     >

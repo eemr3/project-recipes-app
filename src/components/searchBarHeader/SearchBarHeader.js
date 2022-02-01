@@ -42,9 +42,11 @@ export default function SearchBarHeader() {
       break;
     }
   };
+
   const handlefunction = () => {
     switchHandle();
   };
+
   const handleRequestApi = () => (
     selectedButton === 'First letter' && headerInputText.length > 1 ? (
       global.alert('Your search must have only 1 (one) character')) : (
