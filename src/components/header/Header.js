@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'react-bootstrap';
+
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
 import SearchBarHeader from '../searchBarHeader/SearchBarHeader';
@@ -45,6 +46,7 @@ function Header(props) {
           <SearchBarHeader />
         </Container>
       )}
+
     </header>
   );
 }

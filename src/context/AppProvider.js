@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.m
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
 import { requestAllDrinks, requestAllFoods } from '../services/requestsApi';
+import { requestByIngredients } from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
   const [selectedButton, setSelectedButton] = useState('');
@@ -30,6 +31,19 @@ const AppProvider = ({ children }) => {
     setArrayMeals(data.drinks);
     if (data.drinks.length === 1) {
       history.push(`/drinks/${data.drinks[0].idDrink}`);
+    }
+  };
+
+  const handleIngredientsFilter = (ingredientName) => {
+    console.log(ingredientName);
+    if (location.pathname === '/explore/drinks/ingredients') {
+      const COCKTAIL = 'thecocktaildb';
+      requestByIngredients(COCKTAIL, ingredientName)
+        .then(({ drinks }) => setArrayMeals(drinks));
+    } else if (location.pathname === '/explore/foods/ingredients') {
+      const MEAL = 'themealdb';
+      requestByIngredients(MEAL, ingredientName)
+        .then(({ meals }) => setArrayMeals(meals));
     }
   };
 
@@ -75,6 +89,7 @@ const AppProvider = ({ children }) => {
         handleArrayMeals,
         arrayMeals,
         setArrayMeals,
+        handleIngredientsFilter,
       } }
     >
       {children}

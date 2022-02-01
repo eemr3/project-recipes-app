@@ -28,6 +28,7 @@ function Foods() {
         classNameContent="header-foods-content "
       />
       <GridMeals />
+
       <Footer />
     </div>
   );

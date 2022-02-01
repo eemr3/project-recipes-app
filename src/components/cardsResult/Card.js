@@ -5,7 +5,6 @@ import { Card, Col } from 'react-bootstrap';
 
 export default function CardResults({ image, name, index }) {
   return (
-
     <Col data-testid={ `${index}-recipe-card` }>
       <Card>
         <Card.Img variant="top" src={ image } data-testid={ `${index}-card-img` } />
@@ -14,7 +13,6 @@ export default function CardResults({ image, name, index }) {
         </Card.Body>
       </Card>
     </Col>
-
   );
 }
 
@@ -22,5 +20,4 @@ CardResults.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  // recipe: PropTypes.string.isRequired,
 };
