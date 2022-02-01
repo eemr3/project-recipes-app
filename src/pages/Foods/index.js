@@ -14,9 +14,9 @@ function Foods() {
       <h1>Foods</h1>
       {arrayMeals ? arrayMeals
         .slice(0, DOZE)
-        .map(({ idMeal, strMealThumb, strMeal, strInstructions }, index) => (
+        .map(({ strMealThumb, strMeal, strInstructions }, index) => (
           <CardResults
-            key={ idMeal }
+            key={ index }
             index={ index }
             recipe={ strInstructions }
             image={ strMealThumb }

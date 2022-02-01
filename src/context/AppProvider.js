@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
+import { requestByIngredients } from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
   const [selectedButton, setSelectedButton] = useState('');
@@ -31,6 +32,19 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const handleIngredientsFilter = (ingredientName) => {
+    console.log(ingredientName);
+    if (location.pathname === '/explore/drinks/ingredients') {
+      const COCKTAIL = 'thecocktaildb';
+      requestByIngredients(COCKTAIL, ingredientName)
+        .then(({ drinks }) => setArrayMeals(drinks));
+    } else if (location.pathname === '/explore/foods/ingredients') {
+      const MEAL = 'themealdb';
+      requestByIngredients(MEAL, ingredientName)
+        .then(({ meals }) => setArrayMeals(meals));
+    }
+  };
+
   const verifyerArrayMeals = (data) => {
     if (location.pathname === '/drinks') {
       handleDrinks(data);
@@ -56,6 +70,7 @@ const AppProvider = ({ children }) => {
         headerInputText,
         handleArrayMeals,
         arrayMeals,
+        handleIngredientsFilter,
       } }
     >
       {children}
