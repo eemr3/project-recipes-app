@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../../components/header/Header';
+import Header from '../../components/Header/Header';
 import { requestAllIngredients } from '../../services/requestsApi';
 // import { Container } from './styles';
 import Footer from '../../components/Footer';
 import AppContext from '../../context/AppContext';
+
+import './ExploreFoodIgrendient.css';
 
 function ExploreFoodIgrendient() {
   const [arrayIngredients, setArrayIngredients] = useState('');

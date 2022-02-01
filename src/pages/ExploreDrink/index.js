@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../../components/header/Header';
+import Header from '../../components/Header/Header';
 // import { Container } from './styles';
 import Footer from '../../components/Footer';
 import { requestSurprise } from '../../services/requestsApi';
+
+import './ExploreDrink.css';
 
 function ExploreDrink() {
   const url = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
@@ -14,7 +16,11 @@ function ExploreDrink() {
   };
   return (
     <div>
-      <Header name="Explore Drinks" enableSearch={ false } />
+      <Header
+        classNameContent="header-exploredrink-content"
+        name="Explore Drinks"
+        enableSearch={ false }
+      />
       <h1>Explore Drink</h1>
       <button
         onClick={ () => history

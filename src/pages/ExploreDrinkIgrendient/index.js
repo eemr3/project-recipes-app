@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import Header from '../../components/header/Header';
+import Header from '../../components/Header/Header';
 // import { Container } from './styles';
 import Footer from '../../components/Footer';
 import { requestAllIngredients } from '../../services/requestsApi';
 import AppContext from '../../context/AppContext';
+
+import './ExploreDrinkIgrendient.css';
 
 function ExploreDrinkIgrendient() {
   const [arrayIngredients, setArrayIngredients] = useState('');
@@ -26,7 +28,11 @@ function ExploreDrinkIgrendient() {
 
   return (
     <div>
-      <Header name="Explore Ingredients" enableSearch={ false } />
+      <Header
+        classNameContent="header-ExploreDrinkIgrendient-content"
+        name="Explore Ingredients"
+        enableSearch={ false }
+      />
       <h1>Explore Drink Igrendient</h1>
       <Button>Ola</Button>
       {

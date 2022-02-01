@@ -1,11 +1,16 @@
 import React from 'react';
-import Header from '../../components/header/Header';
-// import { Container } from './styles';
+import Header from '../../components/Header/Header';
+
+import './FavoriteRecipes.css';
 
 function FavoriteRecipes() {
   return (
     <div>
-      <Header name="Favorite Recipes" enableSearch={ false } />
+      <Header
+        classNameContent="header-FavoriteRecipes-content"
+        name="Favorite Recipes"
+        enableSearch={ false }
+      />
       <h1>Favorite Recipes</h1>
     </div>
   );

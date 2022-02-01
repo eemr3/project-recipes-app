@@ -2,10 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import PropTypes from 'prop-types';
 import AppContext from './AppContext';
-import { requestAllDrinks, requestAllFoods } from '../services/requestsApi';
-import { requestByIngredients } from '../services/requestsApi';
+import {
+  requestAllDrinks,
+  requestAllFoods,
+  requestByIngredients,
+  requestCategoriesDrinks,
+  requestSpecificCategoryOfDrinks,
+  requestSpecificCategoryOfFood,
+  requestCategoriesMeals } from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
+  const [toggle, setToggle] = useState(true);
+  const [getMeals, setGetMeals] = useState([]);
+  const [allCategory, setAllCategory] = useState('');
+  const [nameBtn, setNameBtn] = useState('');
+  const [categoryButtons, setCategaryButtons] = useState([]);
+  const [specifiCategory, setSpecifiCategory] = useState([]);
   const [selectedButton, setSelectedButton] = useState('');
   const handleSectedButton = (id) => {
     setSelectedButton(id);
@@ -24,7 +36,6 @@ const AppProvider = ({ children }) => {
     setArrayMeals(data.meals);
     if (data.meals.length === 1) {
       history.push(`/foods/${data.meals[0].idMeal}`);
-      console.log(data.meals);
     }
   };
   const handleDrinks = (data) => {
@@ -67,17 +78,48 @@ const AppProvider = ({ children }) => {
     if (location.pathname === '/drinks') {
       const getDrinksData = async () => {
         const response = await requestAllDrinks();
-        setArrayMeals(response);
+        setGetMeals(response);
+      };
+      const getCategoryBtnMeals = async () => {
+        const response = await requestCategoriesDrinks();
+        setCategaryButtons(response);
       };
       getDrinksData();
+      getCategoryBtnMeals();
     } else if (location.pathname === '/foods') {
       const getMealsData = async () => {
         const response = await requestAllFoods();
-        setArrayMeals(response.meals);
+        setGetMeals(response.meals);
+      };
+      const getCategoryBtnDrink = async () => {
+        const response = await requestCategoriesMeals();
+        setCategaryButtons(response);
       };
       getMealsData();
+      getCategoryBtnDrink();
     }
   }, [location.pathname]);
+
+  const getSpecificCategories = async (category) => {
+    console.log(category);
+    if (location.pathname === '/foods') {
+      const response = await requestSpecificCategoryOfFood(category);
+      setSpecifiCategory(response);
+    } else if (location.pathname === '/drinks') {
+      const response = await requestSpecificCategoryOfDrinks(category);
+      setSpecifiCategory(response);
+    }
+  };
+
+  const setAllCategoryBtn = (category) => {
+    setAllCategory(category);
+  };
+
+  const toggleBtnCategory = (value) => {
+    if (nameBtn === value) {
+      setToggle(!toggle);
+    }
+  };
 
   return (
     <AppContext.Provider
@@ -90,6 +132,16 @@ const AppProvider = ({ children }) => {
         arrayMeals,
         setArrayMeals,
         handleIngredientsFilter,
+        getMeals,
+        categoryButtons,
+        setNameBtn,
+        specifiCategory,
+        getSpecificCategories,
+        toggleBtnCategory,
+        toggle,
+        setAllCategory,
+        allCategory,
+        setAllCategoryBtn,
       } }
     >
       {children}

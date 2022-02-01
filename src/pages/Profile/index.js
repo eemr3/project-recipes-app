@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Header from '../../components/header/Header';
-// import { Container } from './styles';
+import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer';
+
+import './Profile.css';
 
 function Profile() {
   const [emailUser, setEmailUser] = useState([]);
@@ -19,7 +20,11 @@ function Profile() {
 
   return (
     <div>
-      <Header name="Profile" enableSearch={ false } />
+      <Header
+        classNameContent="header-profile-content"
+        name="Profile"
+        enableSearch={ false }
+      />
 
       {emailUser ? (
         <span data-testid="profile-email">{emailUser.email}</span>

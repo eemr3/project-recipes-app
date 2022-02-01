@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CardGroup, Container, Row, Spinner } from 'react-bootstrap';
 import AppContext from '../../context/AppContext';
 import CardResults from '../cardsResult/Card';
@@ -9,7 +9,27 @@ function GridMeals() {
     handleInputHeader,
     handleSectedButton,
     setArrayMeals,
+    getMeals,
+    specifiCategory,
+    toggle,
+    toggleBtnCategory,
+    allCategory,
   } = useContext(AppContext);
+  const [newArrayMeals, setNewArrayMeals] = useState([]);
+
+  useEffect(() => {
+    const controlArray = () => {
+      if (arrayMeals.length > 0) {
+        return arrayMeals;
+      }
+      if (specifiCategory.length !== 0 && toggle && allCategory !== 'All') {
+        return specifiCategory;
+      }
+      toggleBtnCategory();
+      return getMeals;
+    };
+    setNewArrayMeals(controlArray());
+  }, [arrayMeals, getMeals, specifiCategory, toggle, toggleBtnCategory, allCategory]);
 
   useEffect(() => () => {
     handleInputHeader('');
@@ -20,11 +40,11 @@ function GridMeals() {
 
   return (
     <Container mt={ 3 } className="mt-4 mb-5 text-center">
-      {arrayMeals.length > 0
+      {newArrayMeals.length > 0
         ? (
           <CardGroup>
             <Row md={ 2 } className="g-4">
-              { arrayMeals
+              { newArrayMeals
                 .slice(0, DOZE).map(({
                   idMeal,
                   strMealThumb,
@@ -36,6 +56,7 @@ function GridMeals() {
                     image={ strMealThumb }
                     name={ strMeal }
                     url="/foods/"
+                    mealId={ idMeal }
                   />
                 )) }
             </Row>

@@ -29,7 +29,7 @@ export const requestCategoriesMeals = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
   const response = await fetch(URL);
   const data = await response.json();
-  return data;
+  return data.meals;
 };
 
 export const requestCategoriesDrinks = async () => {
@@ -51,7 +51,8 @@ export const requestSpecificCategoryOfDrinks = async (drinks) => {
   const response = await fetch(URL);
   const data = await response.json();
   return data.drinks;
-=======
+};
+
 export const requestAllNationality = async () => {
   const URL = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
   const response = await fetch(URL);
@@ -67,13 +68,12 @@ export const requestAllIngredients = async (route) => {
 };
 
 export const requestByIngredients = async (route, ingredient) => {
-  const URL = `https://www.${route}.com/api/json/v1/1/filter.php?i=${ingredient} `;
+  const URL = `https://www.${route}.com/api/json/v1/1/filter.php?i=${ingredient}`;
 
   const response = await fetch(URL);
   const object = await response.json();
   return object;
 };
-
 
 export const requestSurprise = async (url) => {
   const response = await fetch(url);

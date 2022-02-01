@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CardGroup, Container, Row, Spinner } from 'react-bootstrap';
 import AppContext from '../../context/AppContext';
 
@@ -10,10 +10,30 @@ function GridDrinks() {
     handleInputHeader,
     handleSectedButton,
     setArrayMeals,
+    getMeals,
+    specifiCategory,
+    toggle,
+    toggleBtnCategory,
+    allCategory,
   } = useContext(AppContext);
 
+  const [newArrayMeals, setNewArrayMeals] = useState([]);
+
+  useEffect(() => {
+    const controlArray = () => {
+      if (arrayMeals.length > 0) {
+        return arrayMeals;
+      }
+      if (specifiCategory.length !== 0 && toggle && allCategory !== 'All') {
+        return specifiCategory;
+      }
+      toggleBtnCategory();
+      return getMeals;
+    };
+    setNewArrayMeals(controlArray());
+  }, [arrayMeals, getMeals, specifiCategory, toggle, toggleBtnCategory, allCategory]);
+
   useEffect(() => () => {
-    console.log('desmontado');
     handleInputHeader('');
     handleSectedButton('');
     setArrayMeals([]);
@@ -22,10 +42,10 @@ function GridDrinks() {
 
   return (
     <Container mt={ 3 } className="mt-4 mb-5 text-center">
-      {arrayMeals.length > 0 ? (
+      {newArrayMeals.length > 0 ? (
         <CardGroup>
           <Row md={ 2 } className="g-4">
-            {arrayMeals
+            {newArrayMeals
               .slice(0, DOZE).map(({
                 idDrink,
                 strDrinkThumb,
@@ -38,7 +58,7 @@ function GridDrinks() {
                   key={ idDrink }
                   name={ strDrink }
                   image={ strDrinkThumb }
-                  drinkId={ idDrink }
+                  mealId={ idDrink }
                   url="/drinks/"
                 />
               ))}

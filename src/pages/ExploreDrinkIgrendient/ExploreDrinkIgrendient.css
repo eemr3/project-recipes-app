@@ -1,0 +1,10 @@
+.header-ExploreDrinkIgrendient-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-ExploreDrinkIgrendient-content span {
+  flex: auto;
+}
