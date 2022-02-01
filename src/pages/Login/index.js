@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
+import { Container } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import {
   setCocktailsTokenInStorage,
   setEmailInStorage,
   setMealsTokenInStorage,
 } from '../../services/localStoreageData';
-
-// import AppContext from '../../context/AppContext';
+import LogoImg from '../../images/Logo.svg';
 
 import './Login.css';
 
@@ -36,7 +36,10 @@ function Login() {
   };
 
   return (
-    <div className="Login">
+    <Container
+      className="Login"
+    >
+      <img src={ LogoImg } alt="Logo do App" />
       <Form onSubmit={ handleSubmit }>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -61,8 +64,9 @@ function Login() {
           />
         </Form.Group>
         <Button
+          className="login-btn"
           data-testid="login-submit-btn"
-          variant="dark"
+          // variant="danger"
           block
           size="lg"
           type="submit"
@@ -71,7 +75,7 @@ function Login() {
           Login
         </Button>
       </Form>
-    </div>
+    </Container>
   );
 }
 

@@ -1,0 +1,8 @@
+.header-foods-content {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  transition: all 0.3s ease;
+  width: 100%;
+}

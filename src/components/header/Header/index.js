@@ -1,21 +1,27 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { Button, Container } from 'react-bootstrap';
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
-import SearchBarHeader from '../searchBarHeader/SearchBarHeader';
-import AppContext from '../../context/AppContext';
 
 import './Header.css';
 
 function Header(props) {
   const { name, enableSearch, classNameContent } = props;
   const [searchBar, setsearchBar] = useState(true);
+  // const history = useHistory();
 
-  const { headerInputText, handleInputHeader } = useContext(AppContext);
+  // const handleClickProfile = () => {
+  //   history.push('/profile');
+  // };
 
   const validaSearchBar = () => {
+    // if (searchBar === 1) {
+    //   setsearchBar(2);
+    // } else if (searchBar === 2) {
+    //   setsearchBar(1);
+    // }
     setsearchBar(!searchBar);
   };
 
@@ -35,16 +41,15 @@ function Header(props) {
         )}
       </div>
       {searchBar ? '' : (
-        <Container>
-          <input
-            value={ headerInputText }
-            onChange={ ({ target }) => handleInputHeader(target.value) }
+        <div className="header-content-search">
+          <Form.Control
             type="text"
             data-testid="search-input"
+            placeholder="Search"
           />
-          <SearchBarHeader />
-        </Container>
+        </div>
       )}
+      { /* <input type="text" data-testid="search-input" /> */ }
     </header>
   );
 }

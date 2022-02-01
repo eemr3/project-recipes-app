@@ -16,7 +16,6 @@ export default function SearchBarHeader() {
   const [routeLocation, setRouteLocation] = useState('');
 
   const location = useLocation();
-  console.log(location);
 
   useEffect(() => (
     location.pathname === '/drinks'
@@ -43,9 +42,11 @@ export default function SearchBarHeader() {
       break;
     }
   };
+
   const handlefunction = () => {
     switchHandle();
   };
+
   const handleRequestApi = () => (
     selectedButton === 'First letter' && headerInputText.length > 1 ? (
       global.alert('Your search must have only 1 (one) character')) : (
