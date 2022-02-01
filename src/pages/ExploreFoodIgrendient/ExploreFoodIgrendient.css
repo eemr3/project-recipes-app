@@ -1,0 +1,10 @@
+.header-ExploreFoodIgrendient-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-ExploreFoodIgrendient-content span {
+  flex: auto;
+}

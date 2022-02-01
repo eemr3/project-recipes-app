@@ -1,0 +1,11 @@
+.header-ExploreFoodNationalitie-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-ExploreFoodNationalitie-content span {
+  flex: auto;
+  font-size: 1.3rem;
+}

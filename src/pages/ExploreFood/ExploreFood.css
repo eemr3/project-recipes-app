@@ -1,0 +1,10 @@
+.header-explorefood-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-explorefood-content span {
+  flex: auto;
+}

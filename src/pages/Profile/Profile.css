@@ -1,0 +1,11 @@
+.header-profile-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-profile-content span {
+  flex: auto;
+  font-size: 1.8rem;
+}

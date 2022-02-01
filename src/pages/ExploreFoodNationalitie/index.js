@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/header/Header';
+import Header from '../../components/Header/Header';
 // import { Container } from './styles';
 import Footer from '../../components/Footer';
 import { requestAllNationality } from '../../services/requestsApi';
+
+import './ExploreFoodNationalitie.css';
 
 function ExploreFoodNationalitie() {
   const [allNationality, setAllNationality] = useState([]);
@@ -13,7 +15,11 @@ function ExploreFoodNationalitie() {
 
   return (
     <div>
-      <Header name="Explore Nationalities" enableSearch />
+      <Header
+        classNameContent="header-ExploreFoodNationalitie-content"
+        name="Explore Nationalities"
+        enableSearch
+      />
       <h1>Explore Food Nationalitie</h1>
 
       <select

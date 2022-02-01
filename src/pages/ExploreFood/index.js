@@ -1,9 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../../components/header/Header';
+import Header from '../../components/Header/Header';
 // import { Container } from './styles';
 import Footer from '../../components/Footer';
 import { requestSurprise } from '../../services/requestsApi';
+
+import './ExploreFood.css';
 
 function ExploreFood() {
   const url = 'https://www.themealdb.com/api/json/v1/1/random.php';
@@ -15,7 +17,11 @@ function ExploreFood() {
 
   return (
     <div>
-      <Header name="Explore Foods" enableSearch={ false } />
+      <Header
+        classNameContent="header-explorefood-content"
+        name="Explore Foods"
+        enableSearch={ false }
+      />
       <h1>Explore Foods</h1>
       <button
         type="button"

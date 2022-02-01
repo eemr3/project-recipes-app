@@ -1,0 +1,10 @@
+.header-explore-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-explore-content span {
+  flex: auto;
+}

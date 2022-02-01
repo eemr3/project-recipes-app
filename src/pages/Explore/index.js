@@ -1,14 +1,19 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import Header from '../../components/header/Header';
-// import { Container } from './styles';
+import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer';
+
+import './Explore.css';
 
 function Explore() {
   const history = useHistory();
   return (
     <div>
-      <Header name="Explore" enableSearch={ false } />
+      <Header
+        classNameContent="header-explore-content"
+        name="Explore"
+        enableSearch={ false }
+      />
       <h1>Explore</h1>
       <button
         data-testid="explore-foods"

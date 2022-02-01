@@ -1,11 +1,16 @@
 import React from 'react';
-import Header from '../../components/header/Header';
-// import { Container } from './styles';
+import Header from '../../components/Header/Header';
+
+import './DoneRecipes.css';
 
 function DoneRecipes() {
   return (
     <div>
-      <Header name="Done Recipes" enableSearch={ false } />
+      <Header
+        classNameContent="header-donerecipes-content"
+        name="Done Recipes"
+        enableSearch={ false }
+      />
       <h1>Done Recipes</h1>
     </div>
   );

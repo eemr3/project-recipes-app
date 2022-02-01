@@ -1,0 +1,10 @@
+.header-donerecipes-content {
+  align-items: center;
+  display: flex;
+  padding: 0 10px;
+  width: 100%;
+}
+
+.header-donerecipes-content span {
+  flex: auto;
+}
