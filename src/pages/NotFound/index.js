@@ -5,7 +5,7 @@ import React from 'react';
 function NotFound() {
   return (
     <div>
-      <h1>Ops... A página que você buscou não foi encontrada!</h1>
+      <h1>Not Found</h1>
     </div>
   );
 }

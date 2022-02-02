@@ -86,7 +86,9 @@ const AppProvider = ({ children }) => {
       };
       getDrinksData();
       getCategoryBtnMeals();
-    } else if (location.pathname === '/foods') {
+    } else if (
+      location.pathname === '/foods'
+      || location.pathname === '/explore/foods/nationalities') {
       const getMealsData = async () => {
         const response = await requestAllFoods();
         setGetMeals(response.meals);

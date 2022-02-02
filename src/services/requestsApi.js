@@ -59,7 +59,12 @@ export const requestAllNationality = async () => {
   const object = await response.json();
   return object;
 };
-
+export const requestByNationality = async (nationalty) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalty}`;
+  const response = await fetch(URL);
+  const object = await response.json();
+  return object;
+};
 export const requestAllIngredients = async (route) => {
   const URL = `https://www.${route}.com/api/json/v1/1/list.php?i=list`;
   const response = await fetch(URL);
