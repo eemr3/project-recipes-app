@@ -9,7 +9,8 @@ import {
   requestCategoriesDrinks,
   requestSpecificCategoryOfDrinks,
   requestSpecificCategoryOfFood,
-  requestCategoriesMeals } from '../services/requestsApi';
+  requestCategoriesMeals,
+} from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
   const [toggle, setToggle] = useState(true);

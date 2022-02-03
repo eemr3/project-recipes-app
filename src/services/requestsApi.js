@@ -85,3 +85,19 @@ export const requestSurprise = async (url) => {
   const object = await response.json();
   return object;
 };
+const now = new Date();
+const data = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
+export const requestById = async (route, id) => {
+  const response = await fetch(`https://www.${route}.com/api/json/v1/1/lookup.php?i=${id}`);
+  const object = await response.json();
+  if (object.drinks) {
+    const { drinks } = object;
+    const newDrinks = { ...drinks[0], ...data };
+    return newDrinks;
+  } if (object.meals) {
+    const { meals } = object;
+    const newMeals = { ...meals[0], ...data };
+    return newMeals;
+  }
+  console.log(response.error);
+};

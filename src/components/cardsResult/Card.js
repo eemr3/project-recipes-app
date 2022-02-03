@@ -1,13 +1,15 @@
 import React, { } from 'react';
 import PropTypes from 'prop-types';
-
 import { Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-export default function CardResults({ image, name, index, url, mealId }) {
+export default function CardResults({
+  image, name, index, url, mealId }) {
   return (
     <Link to={ `${url}${mealId}` }>
-      <Col data-testid={ `${index}-recipe-card` }>
+      <Col
+        data-testid={ `${index}-recipe-card` }
+      >
         <Card>
           <Card.Img variant="top" src={ image } data-testid={ `${index}-card-img` } />
           <Card.Body>
