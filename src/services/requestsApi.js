@@ -85,3 +85,17 @@ export const requestSurprise = async (url) => {
   const object = await response.json();
   return object;
 };
+
+export const requestMealById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.meals;
+};
+
+export const requestCocktailById = async (id) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.drinks;
+};
