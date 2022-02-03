@@ -103,7 +103,6 @@ const AppProvider = ({ children }) => {
   }, [location.pathname]);
 
   const getSpecificCategories = async (category) => {
-    console.log(category);
     if (location.pathname === '/foods') {
       const response = await requestSpecificCategoryOfFood(category);
       setSpecifiCategory(response);
