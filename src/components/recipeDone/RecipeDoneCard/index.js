@@ -1,40 +1,32 @@
-import React, { useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useCallback, useEffect, useState } from 'react';
 /* import { CardGroup, Container, Row, Card, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'; */
 import { requestById } from '../../../services/requestsApi';
+import { handleStorageDone } from '../../../services/localStoreageData';
 
-const FIVE_THOUSAND = 5000;
 export default function RecipeDoneCard() {
   const [storageInProgress, setStorageInProgress] = useState([]);
   const [requisitionData, setRequisitionData] = useState([]);
-  /*   const handleRequisitionData = () => {
-    setStorageInProgress({ ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
-      ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails });
-    return setRequisitionData(Object.keys(storageInProgress).forEach((id) => {
-      if (Number(id) > FIVE_THOUSAND) {
-        requestById('themealdb', id)
-          .then((newMeals) => setRequisitionData([...requisitionData, newMeals]));
-      } else {
-        requestById('thecocktaildb', id)
-          .then((newDrinks) => setRequisitionData([...requisitionData, newDrinks]));
-      }
-    }));
-  }; */
-  console.log(requisitionData);
+
+  // eslint-disable-next-line no-unused-vars
 
   useEffect(() => {
-    setStorageInProgress({ ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
-      ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails });
-    setRequisitionData(Object.keys(storageInProgress).forEach((id) => {
-      if (Number(id) > FIVE_THOUSAND) {
-        requestById('themealdb', id)
-          .then((newMeals) => setRequisitionData([...requisitionData, newMeals]));
-      } else {
-        requestById('thecocktaildb', id)
-          .then((newDrinks) => setRequisitionData([...requisitionData, newDrinks]));
-      }
-    }));
+    setStorageInProgress(
+      {
+        ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
+        ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails,
+      },
+    );
   }, []);
+
+  const handleState = useCallback((array) => {
+    setRequisitionData(array);
+  }, []);
+  useEffect(() => {
+    Object.keys(storageInProgress).map((id) => requestById(id)
+      .then((ae) => handleState([...requisitionData, ae])));
+  }, [storageInProgress]);
   /*  console.log(Object.keys(storageInProgress)); */
   return (
     <h1>sem receitas Feitas</h1>

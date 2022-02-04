@@ -87,17 +87,19 @@ export const requestSurprise = async (url) => {
 };
 const now = new Date();
 const data = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
-export const requestById = async (route, id) => {
-  const response = await fetch(`https://www.${route}.com/api/json/v1/1/lookup.php?i=${id}`);
-  const object = await response.json();
-  if (object.drinks) {
-    const { drinks } = object;
-    const newDrinks = { ...drinks[0], ...data };
-    return newDrinks;
-  } if (object.meals) {
-    const { meals } = object;
+
+export const requestById = async (id) => {
+  const MAGIC = 50000;
+  if (Number(id) > MAGIC) {
+    const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+    const object1 = await response1.json();
+    const { meals } = object1;
     const newMeals = { ...meals[0], ...data };
     return newMeals;
   }
-  console.log(response.error);
+  const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const object2 = await response2.json();
+  const { drinks } = object2;
+  const newDrinks = { ...drinks[0], ...data };
+  return newDrinks;
 };
