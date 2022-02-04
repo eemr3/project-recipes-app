@@ -85,21 +85,43 @@ export const requestSurprise = async (url) => {
   const object = await response.json();
   return object;
 };
-const now = new Date();
-const data = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
 
 export const requestById = async (id) => {
+  const now = new Date();
+  const date = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
   const MAGIC = 50000;
+
   if (Number(id) > MAGIC) {
     const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const object1 = await response1.json();
     const { meals } = object1;
-    const newMeals = { ...meals[0], ...data };
-    return newMeals;
+    const newMeals = { ...meals[0], ...date };
+    const { idMeal, strArea, strMealThumb, strTags, strMeal } = newMeals;
+
+    const mealObject = {
+      date: newMeals.date,
+      id: idMeal,
+      image: strMealThumb,
+      name: strMeal,
+      tags: strTags,
+      strArea,
+    };
+    return mealObject;
   }
+
   const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
   const object2 = await response2.json();
   const { drinks } = object2;
-  const newDrinks = { ...drinks[0], ...data };
-  return newDrinks;
+  const newDrinks = { ...drinks[0], ...date };
+  const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
+
+  const drinkObject = {
+    date: newDrinks.date,
+    id: idDrink,
+    image: strDrinkThumb,
+    tags: strTags,
+    name: strDrink,
+    strAlcoholic,
+  };
+  return drinkObject;
 };
