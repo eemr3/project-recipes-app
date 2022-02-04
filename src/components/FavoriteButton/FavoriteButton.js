@@ -4,12 +4,13 @@ import AppContext from '../../context/AppContext';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
-function FavButton({ recipe }) {
+function FavoriteButton({ recipe }) {
   let currentRecipe = {};
-  const recipeType = Object.values(recipe)[1];
-  const firstKey = Object.keys(recipe)[0];
+  const recipeName = Object.values(recipe)[1];
+  const recipeId = Object.keys(recipe)[0];
   const { setFavoriteList } = useContext(AppContext);
-  if (firstKey === 'idMeal') {
+
+  if (recipeId === 'idMeal') {
     currentRecipe = {
       id: recipe.idMeal,
       type: 'food',
@@ -19,7 +20,7 @@ function FavButton({ recipe }) {
       name: recipe.strMeal,
       image: recipe.strMealThumb,
     };
-  } else if (firstKey === 'idDrink') {
+  } else if (recipeId === 'idDrink') {
     currentRecipe = {
       id: recipe.idDrink,
       type: 'drink',
@@ -29,14 +30,14 @@ function FavButton({ recipe }) {
       name: recipe.strDrink,
       image: recipe.strDrinkThumb,
     };
-  } else if (recipeType === 'food' || recipeType === 'drink') {
+  } else if (recipeName === 'food' || recipeName === 'drink') {
     currentRecipe = recipe;
   }
-  const [changeHeart, setHeart] = useState(false);
-  const [favList, setFav] = useState();
+  const [stateHeart, setStateHeart] = useState(false);
+  const [favList, setFavList] = useState();
   useEffect(() => {
     const idType = Object.keys(recipe)[0];
-    function checkFavoriteLS() {
+    function checkFavoriteList() {
       let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
       if (!favoriteRecipes) {
         favoriteRecipes = [];
@@ -46,39 +47,39 @@ function FavButton({ recipe }) {
         favoriteRecipes,
       });
     }
-    const { favoriteRecipes, checkFavorite } = checkFavoriteLS();
-    setHeart(checkFavorite);
-    setFav(favoriteRecipes);
-  }, [recipe, changeHeart]);
+    const { favoriteRecipes, checkFavorite } = checkFavoriteList();
+    setStateHeart(checkFavorite);
+    setFavList(favoriteRecipes);
+  }, [recipe, stateHeart]);
 
   function handleFavoriteClick() {
-    if (changeHeart) {
+    if (stateHeart) {
       const indexFav = favList.findIndex((element) => (
         element.id === currentRecipe.id));
       favList.splice(indexFav, 1);
       localStorage.setItem('favoriteRecipes', JSON.stringify(favList));
       setFavoriteList(favList);
-      setHeart(false);
+      setStateHeart(false);
     } else {
       favList.push(currentRecipe);
       localStorage.setItem('favoriteRecipes', JSON.stringify(favList));
       setFavoriteList(favList);
-      setHeart(true);
+      setStateHeart(true);
     }
   }
   return (
     <input
       data-testid="favorite-btn"
       type="image"
-      src={ changeHeart ? blackHeartIcon : whiteHeartIcon }
+      src={ stateHeart ? blackHeartIcon : whiteHeartIcon }
       alt="fav button"
       onClick={ handleFavoriteClick }
     />
   );
 }
 
-FavButton.propTypes = {
+FavoriteButton.propTypes = {
   recipe: PropType.objectOf(PropType.string).isRequired,
 };
 
-export default FavButton;
+export default FavoriteButton;

@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import ShareIcons from '../../images/shareIcon.svg';
-import FavButton from '../FavButton/FavButton';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
 import './CardDetailsandProgress.css';
 
@@ -46,7 +46,7 @@ function CardDetailsandProgress({
           <img src={ ShareIcons } alt="Share recipe" />
         </button>
         <button type="button">
-          <FavButton recipe={ recipe } />
+          <FavoriteButton recipe={ recipe } />
         </button>
       </div>
       <h1 data-testid={ dataTestIdTitle }>{title}</h1>
@@ -65,7 +65,7 @@ CardDetailsandProgress.propTypes = {
   dataTestImg: PropTypes.string.isRequired,
   dataTestIdCategory: PropTypes.string.isRequired,
   dataTestIdInstruction: PropTypes.string.isRequired,
-  recipe: PropTypes.arrayOf.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 CardDetailsandProgress.defaultProps = {
