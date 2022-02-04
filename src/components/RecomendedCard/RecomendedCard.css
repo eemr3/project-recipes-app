@@ -1,11 +1,10 @@
 .containerCardRecomendation {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  overflow-y: auto;
 }
 
 .recomendedImg {
-  width: 140px;
+  width: 180px;
 }
 
 span {
