@@ -55,6 +55,8 @@ function DetailsFood() {
         igredient={ arrayDetailsFoods[ingredient] }
         measure={ arrayDetailsFoods[measurmentKey[index]] }
         index={ index }
+        isvisibility={ false }
+        dataTestIdIg={ `${index}-ingredient-name-and-measure` }
       />
     ));
   }
@@ -68,6 +70,7 @@ function DetailsFood() {
           index={ index }
           str="strDrink"
           thumb="strDrinkThumb"
+          link={ `/drinks/${drink.idDrink}` }
         />
       ))
     );
@@ -86,6 +89,7 @@ function DetailsFood() {
           dataTestIdCategory="recipe-category"
           dataTestIdInstruction="instructions"
           className="arrayDetailsFoods"
+          recipe={ arrayDetailsFoods }
         />
         <section>
           { renderIngredients() }
@@ -100,7 +104,7 @@ function DetailsFood() {
             data-testid="video"
           />
         </section>
-        <Link to={ `/drinks/:${id}/in-progress` }>
+        <Link to={ `/foods/${id}/in-progress` }>
           <button
             className="btn-recipe"
             type="button"

@@ -53,6 +53,8 @@ function DetailsDrink() {
         igredient={ arrayDetailsDrinks[ingredient] }
         measure={ arrayDetailsDrinks[measurmentKey[index]] }
         index={ index }
+        isvisibility={ false }
+        dataTestIdIg={ `${index}-ingredient-name-and-measure` }
       />
     ));
   }
@@ -66,6 +68,7 @@ function DetailsDrink() {
           index={ index }
           str="strMeal"
           thumb="strMealThumb"
+          link={ `/foods/${meal.idMeal}` }
         />
       ))
     );
@@ -79,11 +82,12 @@ function DetailsDrink() {
           title={ arrayDetailsDrinks.strDrink }
           category={ arrayDetailsDrinks.strCategory }
           instructions={ arrayDetailsDrinks.strInstructions }
-          alcohol={ arrayDetailsDrinks.strAlcoholic }
+          alcoholicOrNot={ arrayDetailsDrinks.strAlcoholic }
           dataTestIdTitle="recipe-title"
           dataTestImg="recipe-photo"
           dataTestIdCategory="recipe-category"
           dataTestIdInstruction="instructions"
+          recipe={ arrayDetailsDrinks }
         />
         <section>
           { renderIngredients() }
@@ -91,7 +95,7 @@ function DetailsDrink() {
         <section className="recomended-conteiner">
           { renderRecomendation() }
         </section>
-        <Link to={ `/foods/${id}/in-progress` }>
+        <Link to={ `/drinks/${id}/in-progress` }>
           <button
             type="button"
             data-testid="start-recipe-btn"

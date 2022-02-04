@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import ShareIcons from '../../images/shareIcon.svg';
-import BlackHeartIcon from '../../images/blackHeartIcon.svg';
+import FavButton from '../FavButton/FavButton';
 
 import './CardDetailsandProgress.css';
 
@@ -11,15 +11,17 @@ function CardDetailsandProgress({
   image,
   title,
   category,
-  alcohol,
+  alcoholicOrNot,
   instructions,
   dataTestIdTitle,
   dataTestImg,
   dataTestIdCategory,
   dataTestIdInstruction,
+  recipe,
 }) {
   const [pageURL, setPageURL] = useState(0);
   const [show, setShow] = useState(false);
+
   useEffect(() => {
     setPageURL(window.location.href);
   }, []);
@@ -44,16 +46,11 @@ function CardDetailsandProgress({
           <img src={ ShareIcons } alt="Share recipe" />
         </button>
         <button type="button">
-          <img
-            className="share-btn"
-            src={ BlackHeartIcon }
-            alt="Favorite recipe"
-            data-testid="favorite-btn"
-          />
+          <FavButton recipe={ recipe } />
         </button>
       </div>
       <h1 data-testid={ dataTestIdTitle }>{title}</h1>
-      <p data-testid={ dataTestIdCategory }>{`${category} - ${alcohol}`}</p>
+      <p data-testid={ dataTestIdCategory }>{`${category} - ${alcoholicOrNot}`}</p>
       <p data-testid={ dataTestIdInstruction }>{instructions}</p>
     </div>
   );
@@ -62,12 +59,13 @@ CardDetailsandProgress.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   category: PropTypes.string,
-  alcohol: PropTypes.string.isRequired,
+  alcoholicOrNot: PropTypes.string,
   instructions: PropTypes.string,
   dataTestIdTitle: PropTypes.string.isRequired,
   dataTestImg: PropTypes.string.isRequired,
   dataTestIdCategory: PropTypes.string.isRequired,
   dataTestIdInstruction: PropTypes.string.isRequired,
+  recipe: PropTypes.arrayOf.isRequired,
 };
 
 CardDetailsandProgress.defaultProps = {
@@ -75,5 +73,6 @@ CardDetailsandProgress.defaultProps = {
   title: '',
   category: '',
   instructions: '',
+  alcoholicOrNot: '',
 };
 export default CardDetailsandProgress;
