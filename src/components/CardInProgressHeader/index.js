@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
+// import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import ShareIcons from '../../images/shareIcon.svg';
 import BlackHeartIcon from '../../images/blackHeartIcon.svg';
 import BhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function CardDetailsandProgress({
+function CardInProgressHeader({
   image,
   title,
-  category,
-  instructions,
-  dataTestIdTitle,
   dataTestImg,
-  dataTestIdCategory,
-  dataTestIdInstruction,
 
 }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  // const
+  // const copy = require('clipboard-copy')
   return (
-    <div>
+    <header>
       <div>
-        <img data-testid={ dataTestImg } src={ image } alt={ title } width="162px" />
+        <img data-testid={ dataTestImg } src={ image } alt={ title } width="100%" />
       </div>
       <div>
         <button
@@ -40,33 +38,20 @@ function CardDetailsandProgress({
           />
         </button>
       </div>
-      <h1 data-testid={ dataTestIdTitle }>{title}</h1>
-      <p data-testid={ dataTestIdCategory }>{category}</p>
-      <p
-        data-testid={ dataTestIdInstruction }
-      >
-        {instructions}
 
-      </p>
-    </div>
-  );
+    </header>);
 }
 
-CardDetailsandProgress.propTypes = {
+CardInProgressHeader.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
-  category: PropTypes.string,
-  instructions: PropTypes.string,
-  dataTestIdTitle: PropTypes.string.isRequired,
   dataTestImg: PropTypes.string.isRequired,
-  dataTestIdCategory: PropTypes.string.isRequired,
-  dataTestIdInstruction: PropTypes.string.isRequired,
+
 };
 
-CardDetailsandProgress.defaultProps = {
+CardInProgressHeader.defaultProps = {
   image: '',
   title: '',
-  category: '',
-  instructions: '',
 };
-export default CardDetailsandProgress;
+
+export default CardInProgressHeader;

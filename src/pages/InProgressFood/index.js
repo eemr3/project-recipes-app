@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container } from 'react-bootstrap';
-import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import { requestMealById } from '../../services/requestsApi';
 import ListIgredients from '../../components/ListIgredients';
+import CardInProgressFooter from '../../components/CardInProgressFooter';
+import CardInProgressHeader from '../../components/CardInProgressHeader';
 
 function InProgressFood({ match }) {
   const [getRecipeForRende, setGetRecipeForRende] = useState({});
@@ -41,29 +42,31 @@ function InProgressFood({ match }) {
   return (
     igredientsMeasures.length > 0 ? (
       <Container>
-        <CardDetailsandProgress
+        <CardInProgressHeader
           image={ getRecipeForRende.strMealThumb }
           title={ getRecipeForRende.strMeal }
-          category={ getRecipeForRende.strCategory }
-          instructions={ getRecipeForRende.strInstructions }
-          dataTestIdTitle="recipe-title"
           dataTestImg="recipe-photo"
-          dataTestIdCategory="recipe-category"
-          dataTestIdInstruction="instructions"
         />
         <ul>
           {igredientsMeasures.map((igred, index) => (
             <ListIgredients
-              key={ igred[0] }
+              key={ `${igred[0]}${igred[1]}` }
               igredient={ igred[0] }
               measure={ igred[1] }
               index={ index }
+              idDrink={ getRecipeForRende.idMeal }
+              dataTestIdIg={ `${index}-ingredient-step` }
               isvisibility
             />
-
           ))}
-
         </ul>
+        <CardInProgressFooter
+          dataTestIdTitle="recipe-title"
+          category={ getRecipeForRende.strCategory }
+          instructions={ getRecipeForRende.strInstructions }
+          dataTestIdCategory="recipe-category"
+          dataTestIdInstruction="instructions"
+        />
         <Button type="button" data-testid="finish-recipe-btn">Finalizar receita</Button>
       </Container>
 

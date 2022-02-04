@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Container } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+
+import { Button, Container, ListGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import ListIgredients from '../../components/ListIgredients';
 import { requestCocktailById } from '../../services/requestsApi';
+import InprogressContext from '../../context/InprogressContext';
+import CardInProgressHeader from '../../components/CardInProgressHeader';
+import CardInProgressFooter from '../../components/CardInProgressFooter';
 
 function InProgressDrink({ match }) {
   const [getRecipeForRende, setGetRecipeForRende] = useState({});
-  const [igredientsMeasures, setIgredientsMeasures] = useState([]);
+  const { igredientsMeasures, setIgredientsMeasures } = useContext(InprogressContext);
 
   useEffect(() => {
     const { id } = match.params;
@@ -15,6 +18,7 @@ function InProgressDrink({ match }) {
       const response = await requestCocktailById(id);
       setGetRecipeForRende(response[0]);
     };
+
     getCocktailById();
   }, [match.params]);
 
@@ -23,47 +27,60 @@ function InProgressDrink({ match }) {
       const igrendientAndMeasure = [];
       const igredient = Object.keys(getRecipeForRende)
         .map((key) => (key.includes('strIngredient')
-        && getRecipeForRende[key] !== '' && getRecipeForRende[key]))
+                && getRecipeForRende[key] !== '' && getRecipeForRende[key]))
         .filter((item) => item !== false && item !== null);
 
       const measure = Object.keys(getRecipeForRende)
         .map((key) => (key.includes('strMeasure')
-      && getRecipeForRende[key] !== ' ' && getRecipeForRende[key]))
+              && getRecipeForRende[key] !== ' ' && getRecipeForRende[key]))
         .filter((item) => item !== false && item !== null);
       for (let index = 0; index < igredient.length; index += 1) {
         igrendientAndMeasure.push([igredient[index], measure[index]]);
       }
       setIgredientsMeasures(igrendientAndMeasure);
     };
+
     ingredientAndMeasure();
-  }, [getRecipeForRende]);
+  }, [getRecipeForRende, setIgredientsMeasures]);
 
   return (
     igredientsMeasures.length > 0 ? (
       <Container>
-        <CardDetailsandProgress
+        <CardInProgressHeader
           image={ getRecipeForRende.strDrinkThumb }
           title={ getRecipeForRende.strDrink }
-          category={ getRecipeForRende.strCategory }
-          instructions={ getRecipeForRende.strInstructions }
-          dataTestIdTitle="recipe-title"
           dataTestImg="recipe-photo"
-          dataTestIdCategory="recipe-category"
-          dataTestIdInstruction="instructions"
         />
-        <ul>
+        <ListGroup>
           {igredientsMeasures.map((igred, index) => (
             <ListIgredients
               key={ igred[0] }
               igredient={ igred[0] }
               measure={ igred[1] }
               index={ index }
+              idDrink={ getRecipeForRende.idDrink }
               isvisibility
+              dataTestIdIg={ `${index}-ingredient-step` }
+              igredientsMeasures={ igredientsMeasures }
             />
           ))}
+        </ListGroup>
+        <CardInProgressFooter
+          dataTestIdTitle="recipe-title"
+          category={ getRecipeForRende.strCategory }
+          instructions={ getRecipeForRende.strInstructions }
+          dataTestIdCategory="recipe-category"
+          dataTestIdInstruction="instructions"
 
-        </ul>
-        <Button type="button" data-testid="finish-recipe-btn">Finalizar receita</Button>
+        />
+        <Button
+          type="button"
+          data-testid="finish-recipe-btn"
+
+        >
+          Finalizar receita
+
+        </Button>
       </Container>
 
     ) : (<p>Loading...</p>)
