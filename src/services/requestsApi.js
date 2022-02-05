@@ -127,3 +127,46 @@ export const requestById = async (id) => {
   };
   return drinkObject;
 };
+
+export const mockfavorites = () => {
+  const object = [
+    { alcoholicOrNot: '',
+      area: 'Croatian',
+      category: 'Side',
+      id: '53060',
+      image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
+      name: 'Burek',
+      type: 'foods',
+    },
+
+    {
+      alcoholicOrNot: '',
+      area: 'Turkish',
+      category: 'Side',
+      id: '52977',
+      image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
+      name: 'Corba',
+      type: 'foods',
+    },
+
+    {
+      alcoholicOrNot: 'Alcoholic',
+      area: '',
+      category: 'Shot',
+      id: '14229',
+      image: 'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
+      name: '747',
+      type: 'drinks',
+    },
+
+    { alcoholicOrNot: 'Alcoholic',
+      area: '',
+      category: 'Shot',
+      id: '14229',
+      image: 'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
+      name: '747',
+      type: 'drinks',
+    },
+  ];
+  localStorage.setItem('favoriteRecipe', JSON.stringify(object));
+};
