@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { localStorageManager,
   getLocalStorageInProgress } from '../../functions/inProgressLocalStorageManager';
-// import InprogressContext from '../../context/InprogressContext';
+import InprogressContext from '../../context/InprogressContext';
 
 function ListIngredientsInProgress({
   igredient,
@@ -13,6 +13,7 @@ function ListIngredientsInProgress({
   dataTestIdIg,
 
 }) {
+  const { setCountCheckd } = useContext(InprogressContext);
   const [checkThrough, setCheckThrough] = useState(false);
   const location = useLocation();
   const { id } = useParams();
@@ -21,6 +22,7 @@ function ListIngredientsInProgress({
     const type = location.pathname.includes('/drinks') ? 'cocktails' : 'meals';
     setCheckThrough((prev) => {
       localStorageManager(target, idDrink, type, !prev);
+      setCountCheckd((prevS) => (checkThrough ? prevS - 1 : prevS + 1));
       return !prev;
     });
   };

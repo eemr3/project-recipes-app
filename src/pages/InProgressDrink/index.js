@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
-
-import { Button, Container, ListGroup } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Button, Container, ListGroup } from 'react-bootstrap';
 import { requestCocktailById } from '../../services/requestsApi';
 import InprogressContext from '../../context/InprogressContext';
 import CardInProgressHeader from '../../components/CardInProgressHeader';
@@ -9,8 +9,15 @@ import CardInProgressFooter from '../../components/CardInProgressFooter';
 import ListIngredientsInProgress from '../../components/ListIngredientsInProgress';
 
 function InProgressDrink({ match }) {
+  const {
+    igredientsMeasures,
+    setIgredientsMeasures,
+    countCheckd,
+  } = useContext(InprogressContext);
   const [getRecipeForRende, setGetRecipeForRende] = useState({});
-  const { igredientsMeasures, setIgredientsMeasures } = useContext(InprogressContext);
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  const history = useHistory();
 
   useEffect(() => {
     const { id } = match.params;
@@ -29,7 +36,6 @@ function InProgressDrink({ match }) {
         .map((key) => (key.includes('strIngredient')
                 && getRecipeForRende[key] !== '' && getRecipeForRende[key]))
         .filter((item) => item !== false && item !== null);
-
       const measure = Object.keys(getRecipeForRende)
         .map((key) => (key.includes('strMeasure')
               && getRecipeForRende[key] !== ' ' && getRecipeForRende[key]))
@@ -37,12 +43,14 @@ function InProgressDrink({ match }) {
       for (let index = 0; index < igredient.length; index += 1) {
         igrendientAndMeasure.push([igredient[index], measure[index]]);
       }
+
+      setIsDisabled(() => (igredient.length !== countCheckd));
+
       setIgredientsMeasures(igrendientAndMeasure);
     };
 
     ingredientAndMeasure();
-  }, [getRecipeForRende, setIgredientsMeasures]);
-
+  }, [countCheckd, getRecipeForRende, setIgredientsMeasures]);
   return (
     igredientsMeasures.length > 0 ? (
       <Container>
@@ -77,7 +85,8 @@ function InProgressDrink({ match }) {
         <Button
           type="button"
           data-testid="finish-recipe-btn"
-
+          onClick={ () => history.push('/done-recipes') }
+          disabled={ isDisabled }
         >
           Finalizar receita
 

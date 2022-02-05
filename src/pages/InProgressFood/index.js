@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Container } from 'react-bootstrap';
 import { requestMealById } from '../../services/requestsApi';
@@ -8,8 +9,14 @@ import InprogressContext from '../../context/InprogressContext';
 import ListIngredientsInProgress from '../../components/ListIngredientsInProgress';
 
 function InProgressFood({ match }) {
-  const { getRecipeForRende, setGetRecipeForRende } = useContext(InprogressContext);
+  const {
+    getRecipeForRende,
+    setGetRecipeForRende,
+    countCheckd,
+  } = useContext(InprogressContext);
   const [igredientsMeasures, setIgredientsMeasures] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
     const { id } = match.params;
@@ -35,10 +42,11 @@ function InProgressFood({ match }) {
       for (let index = 0; index < igredient.length; index += 1) {
         igrendientAndMeasure.push([igredient[index], measure[index]]);
       }
+      setIsDisabled(() => (igredient.length !== countCheckd));
       setIgredientsMeasures(igrendientAndMeasure);
     };
     ingredientAndMeasure();
-  }, [getRecipeForRende]);
+  }, [countCheckd, getRecipeForRende]);
 
   return (
     igredientsMeasures.length > 0 ? (
@@ -70,7 +78,14 @@ function InProgressFood({ match }) {
           dataTestIdCategory="recipe-category"
           dataTestIdInstruction="instructions"
         />
-        <Button type="button" data-testid="finish-recipe-btn">Finalizar receita</Button>
+        <Button
+          type="button"
+          data-testid="finish-recipe-btn"
+          onClick={ () => history.push('/done-recipes') }
+          disabled={ isDisabled }
+        >
+          Finalizar receita
+        </Button>
       </Container>
 
     ) : (<p>Loading...</p>)
