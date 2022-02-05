@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { CardGroup, Container, Row, Card, Col, Button } from 'react-bootstrap';
 import useLocalStorage from '../../../context/hooks/useLocalStorage';
 import { requestById } from '../../../services/requestsApi';
@@ -86,29 +86,31 @@ export default function RecipeDoneCard() {
                 image,
                 area,
                 name,
-                doneDate,
+                date,
                 tags,
                 id,
                 route,
                 strAlcoholic,
               }, index) => (
-                <Link key={ index } to={ `${route}/${id}` }>
+                <Container key={ index }>
                   <Col
                     data-testid={ `${index}-recipe-card` }
                   >
                     <Card>
-                      <Card.Img
-                        variant="top"
-                        src={ image }
-                        data-testid={ `${index}-horizontal-image ` }
-                      />
-                      <Card.Body>
+                      <a href={ `${route}/${id}` }>
+                        <Card.Img
+                          variant="top"
+                          src={ image }
+                          data-testid={ `${index}-horizontal-image` }
+                        />
                         <Card.Title
                           data-testid={ `${index}-horizontal-name` }
                         >
                           {name}
 
                         </Card.Title>
+                      </a>
+                      <Card.Body>
                         <Card.Text
                           data-testid={ `${index}-horizontal-top-text` }
                         >
@@ -118,16 +120,21 @@ export default function RecipeDoneCard() {
                         <Card.Text
                           data-testid={ `${index}-horizontal-done-date` }
                         >
-                          {doneDate}
+                          {date}
 
                         </Card.Text>
                         <Button data-testid={ `${index}-horizontal-share-btn` } />
-                        <span>{tags}</span>
+                        <span
+                          data-testid={ `${index}-${tags}-horizontal-tag` }
+                        >
+                          {tags}
+
+                        </span>
 
                       </Card.Body>
                     </Card>
                   </Col>
-                </Link>
+                </Container>
               )) }
           </Row>
         </CardGroup>

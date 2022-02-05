@@ -28,6 +28,7 @@ export const handleStorageInProgress = () => {
       17225: {},
     },
     meal: {
+      52821: {},
       52948: {},
       53026: {},
     },

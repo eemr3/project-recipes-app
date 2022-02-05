@@ -99,7 +99,7 @@ export const requestById = async (id) => {
     const { idMeal, strArea, strMealThumb, strTags, strMeal } = newMeals;
 
     const mealObject = {
-      date: newMeals.date,
+      date: newMeals.data,
       id: idMeal,
       image: strMealThumb,
       name: strMeal,
@@ -115,9 +115,9 @@ export const requestById = async (id) => {
   const { drinks } = object2;
   const newDrinks = { ...drinks[0], ...date };
   const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
-
+  console.log(newDrinks);
   const drinkObject = {
-    date: newDrinks.date,
+    date: newDrinks.data,
     id: idDrink,
     image: strDrinkThumb,
     tags: strTags,
