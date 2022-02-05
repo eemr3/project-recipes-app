@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { CardGroup, Container, Row, Card, Col, Button } from 'react-bootstrap';
-
-import { Link } from 'react-router-dom';
 import useLocalStorage from '../../../context/hooks/useLocalStorage';
 import { requestById } from '../../../services/requestsApi';
 
 export default function RecipeDoneCard() {
   const [storageInProgress, setStorageInProgress] = useState([]);
+  const [drinkFilter, setDrinkfilter] = useState([]);
+  const [mealFilter, setMealFilter] = useState([]);
+  const [mapArray, setMapArray] = useState([]);
   const [doneRecipe, setDoneRecipe] = useLocalStorage('doneRecipe', []);
-
+  const location = useLocation();
+  const FIFTY_THOUSAND = 50000;
   useEffect(() => {
     setStorageInProgress(
       Object.keys({
@@ -16,7 +19,6 @@ export default function RecipeDoneCard() {
         ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails,
       }),
     );
-    /* setIsLoading(true); */
   }, []);
 
   useEffect(() => {
@@ -27,31 +29,71 @@ export default function RecipeDoneCard() {
           newArray = [...newArray, values];
           setDoneRecipe(newArray);
         }));
+    console.log(location.pathname);
   }, [storageInProgress]);
 
-  return doneRecipe.length > 0
+  useEffect(() => {
+    const handleMap = () => {
+      if (drinkFilter.length > 0) {
+        setMapArray(drinkFilter);
+      } else if (mealFilter.length > 0) {
+        setMapArray(mealFilter);
+      } else {
+        setMapArray(doneRecipe);
+      }
+    };
+    handleMap();
+  }, [mapArray, mealFilter, drinkFilter, doneRecipe, setDoneRecipe]);
+
+  const handleFilters = () => {
+    setDrinkfilter([]);
+    setMealFilter(doneRecipe.filter((value) => value.id > FIFTY_THOUSAND));
+  };
+
+  return mapArray.length > 0
     ? (
       <Container>
-        <Button data-testid="filter-by-all-btn">All</Button>
+        <Button
+          data-testid="filter-by-all-btn"
+          onClick={ () => {
+            setMealFilter([]);
+            setDrinkfilter([]);
+          } }
+        >
+          All
+
+        </Button>
         <Button
           data-testid="filter-by-food-btn"
+          onClick={ handleFilters }
         >
           Food
 
         </Button>
-        <Button data-testid="filter-by-drink-btn">Drinks</Button>
+        <Button
+          onClick={
+            () => setDrinkfilter(doneRecipe.filter((value) => value.id < FIFTY_THOUSAND))
+          }
+          data-testid="filter-by-drink-btn"
+        >
+          Drinks
+
+        </Button>
         <CardGroup>
           <Row md={ 2 } className="g-4">
-            { doneRecipe
+            { mapArray
               .map(({
                 image,
                 area,
                 name,
-                doneDate, tags, id, strAlcoholic,
+                doneDate,
+                tags,
+                id,
+                route,
+                strAlcoholic,
               }, index) => (
-                <Link key={ index } to="/">
+                <Link key={ index } to={ `${route}/${id}` }>
                   <Col
-                    onClick={ () => handleDoneRecipes(id) }
                     data-testid={ `${index}-recipe-card` }
                   >
                     <Card>

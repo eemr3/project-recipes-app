@@ -105,6 +105,7 @@ export const requestById = async (id) => {
       name: strMeal,
       tags: strTags,
       strArea,
+      route: '/foods',
     };
     return mealObject;
   }
@@ -122,6 +123,7 @@ export const requestById = async (id) => {
     tags: strTags,
     name: strDrink,
     strAlcoholic,
+    route: '/drinks',
   };
   return drinkObject;
 };
