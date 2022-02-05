@@ -1,10 +1,13 @@
 import React from 'react';
+import CardInProgressHeader from '../../components/CardInProgressHeader';
 
 // import { Container } from './styles';
 
 function DetailsFood() {
   return (
-    <div><h1>Details Food</h1></div>
+    <div>
+      <CardInProgressHeader />
+    </div>
   );
 }
 

@@ -1,13 +1,13 @@
-export const localStorageManager = (target, type, prev) => {
-  const { name, value } = target;
+export const localStorageManager = (target, idDrink, type, prev) => {
+  const { name } = target;
   const key = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
   if (prev) {
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       ...key,
       [type]: {
         ...key[type],
-        [name]: key[type]
-        && key[type][name] ? [...key[type][name], value] : [value],
+        [idDrink]: key[type]
+        && key[type][idDrink] ? [...key[type][idDrink], name] : [name],
       },
     }));
   } else {
@@ -15,7 +15,7 @@ export const localStorageManager = (target, type, prev) => {
       ...key,
       [type]: {
         ...key[type],
-        [name]: key[type][name].filter((item) => item !== value),
+        [idDrink]: key[type][idDrink].filter((item) => item !== name),
       },
     }));
   }

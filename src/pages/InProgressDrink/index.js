@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { Button, Container, ListGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import ListIgredients from '../../components/ListIgredients';
 import { requestCocktailById } from '../../services/requestsApi';
 import InprogressContext from '../../context/InprogressContext';
 import CardInProgressHeader from '../../components/CardInProgressHeader';
 import CardInProgressFooter from '../../components/CardInProgressFooter';
+import ListIngredientsInProgress from '../../components/ListIngredientsInProgress';
 
 function InProgressDrink({ match }) {
   const [getRecipeForRende, setGetRecipeForRende] = useState({});
@@ -50,10 +50,11 @@ function InProgressDrink({ match }) {
           image={ getRecipeForRende.strDrinkThumb }
           title={ getRecipeForRende.strDrink }
           dataTestImg="recipe-photo"
+          inProgress
         />
         <ListGroup>
           {igredientsMeasures.map((igred, index) => (
-            <ListIgredients
+            <ListIngredientsInProgress
               key={ igred[0] }
               igredient={ igred[0] }
               measure={ igred[1] }

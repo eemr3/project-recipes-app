@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Container } from 'react-bootstrap';
 import { requestMealById } from '../../services/requestsApi';
-import ListIgredients from '../../components/ListIgredients';
 import CardInProgressFooter from '../../components/CardInProgressFooter';
 import CardInProgressHeader from '../../components/CardInProgressHeader';
+import InprogressContext from '../../context/InprogressContext';
+import ListIngredientsInProgress from '../../components/ListIngredientsInProgress';
 
 function InProgressFood({ match }) {
-  const [getRecipeForRende, setGetRecipeForRende] = useState({});
+  const { getRecipeForRende, setGetRecipeForRende } = useContext(InprogressContext);
   const [igredientsMeasures, setIgredientsMeasures] = useState([]);
 
   useEffect(() => {
@@ -17,7 +18,7 @@ function InProgressFood({ match }) {
       setGetRecipeForRende(response[0]);
     };
     getMealById();
-  }, [match.params]);
+  }, [match.params, setGetRecipeForRende]);
 
   useEffect(() => {
     const ingredientAndMeasure = () => {
@@ -46,10 +47,12 @@ function InProgressFood({ match }) {
           image={ getRecipeForRende.strMealThumb }
           title={ getRecipeForRende.strMeal }
           dataTestImg="recipe-photo"
+          recipe={ getRecipeForRende }
+          inProgress
         />
-        <ul>
+        <div>
           {igredientsMeasures.map((igred, index) => (
-            <ListIgredients
+            <ListIngredientsInProgress
               key={ `${igred[0]}${igred[1]}` }
               igredient={ igred[0] }
               measure={ igred[1] }
@@ -59,7 +62,7 @@ function InProgressFood({ match }) {
               isvisibility
             />
           ))}
-        </ul>
+        </div>
         <CardInProgressFooter
           dataTestIdTitle="recipe-title"
           category={ getRecipeForRende.strCategory }
