@@ -19,6 +19,7 @@ const AppProvider = ({ children }) => {
   const [categoryButtons, setCategaryButtons] = useState([]);
   const [specifiCategory, setSpecifiCategory] = useState([]);
   const [selectedButton, setSelectedButton] = useState('');
+  const [favoriteList, setFavoriteList] = useState([]);
   const handleSectedButton = (id) => {
     setSelectedButton(id);
   };
@@ -144,6 +145,8 @@ const AppProvider = ({ children }) => {
         setAllCategory,
         allCategory,
         setAllCategoryBtn,
+        favoriteList,
+        setFavoriteList,
       } }
     >
       {children}

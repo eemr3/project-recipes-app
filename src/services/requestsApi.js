@@ -85,3 +85,25 @@ export const requestSurprise = async (url) => {
   const object = await response.json();
   return object;
 };
+
+export const requestDetailsDrinks = async (idDrink) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`;
+  try {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const requestDetailsFoods = async (idFood) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idFood}`;
+  try {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,0 +1,11 @@
+.recomended-conteiner {
+  display: flex;
+  overflow-y: auto;
+}
+
+.btn-recipe {
+  border: 3px solid #73ad21;
+  bottom: 0;
+  position: fixed;
+  width: 300px;
+}
