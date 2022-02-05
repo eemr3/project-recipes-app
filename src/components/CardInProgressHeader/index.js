@@ -57,13 +57,13 @@ CardInProgressHeader.propTypes = {
   image: PropTypes.string,
   title: PropTypes.string,
   dataTestImg: PropTypes.string.isRequired,
-  inProgress: PropTypes.string,
+  inProgress: PropTypes.bool,
 };
 
 CardInProgressHeader.defaultProps = {
   image: '',
   title: '',
-  inProgress: '',
+  inProgress: false,
 };
 
 export default CardInProgressHeader;

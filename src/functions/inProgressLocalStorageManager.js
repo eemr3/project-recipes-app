@@ -21,13 +21,17 @@ export const localStorageManager = (target, idDrink, type, prev) => {
   }
 };
 
-export const getLocalStorageInProgress = (route, id, setCheckThrough, igredient) => {
+export const getLocalStorageInProgress = (route,
+  // eslint-disable-next-line max-params
+  id, setCheckThrough, igredient, setCountCheckd) => {
   const itemLST = JSON.parse(localStorage.getItem('inProgressRecipes')) || null;
   switch (route) {
   case 'drinks':
     if (itemLST && itemLST.cocktails) {
       setCheckThrough(itemLST.cocktails[id]
         .some((item) => item.includes(igredient)));
+      console.log(itemLST.cocktails[id]);
+      setCountCheckd(itemLST.cocktails[id].length);
     }
     break;
   case 'foods':

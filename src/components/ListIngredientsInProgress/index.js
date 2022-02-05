@@ -29,8 +29,8 @@ function ListIngredientsInProgress({
 
   useEffect(() => {
     const route = location.pathname.includes('/drinks') ? 'drinks' : 'foods';
-    getLocalStorageInProgress(route, id, setCheckThrough, igredient);
-  }, [id, igredient, location.pathname]);
+    getLocalStorageInProgress(route, id, setCheckThrough, igredient, setCountCheckd);
+  }, [id, igredient, location.pathname, setCountCheckd]);
 
   return (
     <li>
