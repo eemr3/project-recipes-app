@@ -6,7 +6,12 @@ import InprogressContext from './InprogressContext';
 function InprogressProvider({ children }) {
   const [getRecipeForRende, setGetRecipeForRende] = useState({});
   const [igredientsMeasures, setIgredientsMeasures] = useState([]);
+  const [isStarted, setIsStarted] = useState({
+    bool: false,
+    idItem: 0,
+  });
   const [countCheckd, setCountCheckd] = useState(0);
+  const [isComplet, setIsComplet] = useState(false);
 
   return (
     <InprogressContext.Provider
@@ -17,6 +22,10 @@ function InprogressProvider({ children }) {
         setGetRecipeForRende,
         countCheckd,
         setCountCheckd,
+        isComplet,
+        setIsComplet,
+        isStarted,
+        setIsStarted,
       } }
     >
       {children}

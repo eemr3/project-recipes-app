@@ -3,18 +3,17 @@ import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
 import ShareIcons from '../../images/shareIcon.svg';
-import BlackHeartIcon from '../../images/blackHeartIcon.svg';
-import BhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+// import BlackHeartIcon from '../../images/blackHeartIcon.svg';
+// import BhiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import FavoriteButton from '../FavoriteButton/FavoriteButton';
 
-// const TWO_TIME = 2000;
 function CardInProgressHeader({
   image,
   title,
   dataTestImg,
   inProgress,
+  recipe,
 }) {
-  const [isFavorite, setIsFavorite] = useState(false);
-
   const [show, setShow] = useState(false);
 
   const copyLink = () => {
@@ -35,20 +34,15 @@ function CardInProgressHeader({
         <img data-testid={ dataTestImg } src={ image } alt={ title } width="100%" />
       </div>
       <div>
-        <button data-testid="share-btn" type="button" onClick={ copyLink }>
-          <img src={ ShareIcons } alt="share icon" />
-        </button>
-        <button
-          onClick={ () => setIsFavorite(!isFavorite) }
-          type="button"
-          data-testid="favorite-btn"
+        <img
+          src={ ShareIcons }
+          alt="share icon"
+          data-testid="share-btn"
+          onClick={ copyLink }
+          aria-hidden="true"
+        />
 
-        >
-          <img
-            src={ isFavorite ? BlackHeartIcon : BhiteHeartIcon }
-            alt="Favorite recipe"
-          />
-        </button>
+        <FavoriteButton recipe={ recipe } />
       </div>
     </header>);
 }
@@ -58,12 +52,14 @@ CardInProgressHeader.propTypes = {
   title: PropTypes.string,
   dataTestImg: PropTypes.string.isRequired,
   inProgress: PropTypes.bool,
+  recipe: PropTypes.shape({}),
 };
 
 CardInProgressHeader.defaultProps = {
   image: '',
   title: '',
   inProgress: false,
+  recipe: {},
 };
 
 export default CardInProgressHeader;

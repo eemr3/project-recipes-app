@@ -51,6 +51,7 @@ function InProgressDrink({ match }) {
 
     ingredientAndMeasure();
   }, [countCheckd, getRecipeForRende, setIgredientsMeasures]);
+
   return (
     igredientsMeasures.length > 0 ? (
       <Container>
@@ -58,6 +59,7 @@ function InProgressDrink({ match }) {
           image={ getRecipeForRende.strDrinkThumb }
           title={ getRecipeForRende.strDrink }
           dataTestImg="recipe-photo"
+          recipe={ getRecipeForRende }
           inProgress
         />
         <ListGroup>

@@ -17,15 +17,15 @@ function InProgressFood({ match }) {
   const [igredientsMeasures, setIgredientsMeasures] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const history = useHistory();
+  const { id } = match.params;
 
   useEffect(() => {
-    const { id } = match.params;
     const getMealById = async () => {
       const response = await requestMealById(id);
       setGetRecipeForRende(response[0]);
     };
     getMealById();
-  }, [match.params, setGetRecipeForRende]);
+  }, [id, match.params, setGetRecipeForRende]);
 
   useEffect(() => {
     const ingredientAndMeasure = () => {

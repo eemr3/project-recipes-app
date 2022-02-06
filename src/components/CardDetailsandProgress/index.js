@@ -42,12 +42,15 @@ function CardDetailsandProgress({
         <img data-testid={ dataTestImg } src={ image } alt={ title } />
       </div>
       <div>
-        <button type="button" onClick={ copyLink } data-testid="share-btn">
-          <img src={ ShareIcons } alt="Share recipe" />
-        </button>
-        <button type="button">
-          <FavoriteButton recipe={ recipe } />
-        </button>
+        <img
+          src={ ShareIcons }
+          alt="Share recipe"
+          onClick={ copyLink }
+          data-testid="share-btn"
+          aria-hidden="true"
+          style={ { marginRight: '10px', cursor: 'pointer' } }
+        />
+        <FavoriteButton recipe={ recipe } />
       </div>
       <h1 data-testid={ dataTestIdTitle }>{title}</h1>
       <p data-testid={ dataTestIdCategory }>{`${category} - ${alcoholicOrNot}`}</p>
