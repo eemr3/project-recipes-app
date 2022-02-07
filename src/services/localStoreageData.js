@@ -7,5 +7,7 @@ export const setMealsTokenInStorage = (token) => localStorage
 export const setCocktailsTokenInStorage = (token) => localStorage
   .setItem('cocktailsToken', token);
 
+handleStorageInProgress();
 export const setRecepeProgressInStorage = (recipe) => localStorage
   .setItem('inProgressRecipes', JSON.stringify(recipe));
+

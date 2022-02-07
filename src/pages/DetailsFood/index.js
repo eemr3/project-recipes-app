@@ -116,7 +116,6 @@ function DetailsFood() {
           Start Recipe
         </button>
       </div>
-    </div>
   );
 }
 
