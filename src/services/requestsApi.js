@@ -107,3 +107,17 @@ export const requestDetailsFoods = async (idFood) => {
     console.log(error);
   }
 };
+
+export const requestMealById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.meals;
+};
+
+export const requestCocktailById = async (id) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.drinks;
+};

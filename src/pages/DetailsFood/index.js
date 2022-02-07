@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { requestDetailsFoods } from '../../services/requestsApi';
 import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import ListIgredients from '../../components/ListIgredients';
@@ -7,16 +7,16 @@ import RecomendedCard from '../../components/RecomendedCard';
 
 import './DetailsFood.css';
 
-// import { Container } from './styles';
-
 function DetailsFood() {
   const [arrayDetailsFoods, setArrayDetailsFoods] = useState({});
   const [drinkData, setDrinkData] = useState([]);
+
   const measurmentKey = [];
   const ingredientsKeys = [];
   const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
   const SIX = 6;
   const { id } = useParams();
+  const history = useHistory();
 
   useEffect(() => {
     fetch(drinkUrl)
@@ -98,21 +98,23 @@ function DetailsFood() {
           { renderRecomendation() }
         </section>
         <section>
-          <iframe
-            src={ arrayDetailsFoods.strYoutube }
-            title="W3Scho"
-            data-testid="video"
-          />
+          {Object.values(arrayDetailsFoods).length > 0 ? (
+            <iframe
+              src={ arrayDetailsFoods.strYoutube
+                .replace('\\/', '//').replace('/watch?v=', '/embed/') }
+              title="W3Scho"
+              data-testid="video"
+            />
+          ) : ''}
         </section>
-        <Link to={ `/foods/${id}/in-progress` }>
-          <button
-            className="btn-recipe"
-            type="button"
-            data-testid="start-recipe-btn"
-          >
-            Start Recipe
-          </button>
-        </Link>
+        <button
+          className="btn-recipe"
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ () => history.push(`/foods/${id}/in-progress`) }
+        >
+          Start Recipe
+        </button>
       </div>
     </div>
   );

@@ -68,12 +68,12 @@ function FavoriteButton({ recipe }) {
     }
   }
   return (
-    <input
+    <img
       data-testid="favorite-btn"
-      type="image"
       src={ stateHeart ? blackHeartIcon : whiteHeartIcon }
       alt="fav button"
       onClick={ handleFavoriteClick }
+      aria-hidden="true"
     />
   );
 }
