@@ -1,0 +1,12 @@
+.containerCardRecomendation {
+  display: flex;
+  overflow-y: auto;
+}
+
+.recomendedImg {
+  width: 180px;
+}
+
+span {
+  text-align: center;
+}

@@ -169,4 +169,39 @@ export const mockfavorites = () => {
     },
   ];
   localStorage.setItem('favoriteRecipe', JSON.stringify(object));
+
+export const requestDetailsDrinks = async (idDrink) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`;
+  try {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const requestDetailsFoods = async (idFood) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idFood}`;
+  try {
+    const response = await fetch(URL);
+    const responseJSON = await response.json();
+    return responseJSON;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const requestMealById = async (id) => {
+  const URL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.meals;
+};
+
+export const requestCocktailById = async (id) => {
+  const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const response = await fetch(URL);
+  const data = await response.json();
+  return data.drinks;
 };

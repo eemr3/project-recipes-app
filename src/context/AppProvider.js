@@ -20,6 +20,7 @@ const AppProvider = ({ children }) => {
   const [categoryButtons, setCategaryButtons] = useState([]);
   const [specifiCategory, setSpecifiCategory] = useState([]);
   const [selectedButton, setSelectedButton] = useState('');
+  const [favoriteList, setFavoriteList] = useState([]);
   const handleSectedButton = (id) => {
     setSelectedButton(id);
   };
@@ -104,7 +105,6 @@ const AppProvider = ({ children }) => {
   }, [location.pathname]);
 
   const getSpecificCategories = async (category) => {
-    console.log(category);
     if (location.pathname === '/foods') {
       const response = await requestSpecificCategoryOfFood(category);
       setSpecifiCategory(response);
@@ -145,6 +145,8 @@ const AppProvider = ({ children }) => {
         setAllCategory,
         allCategory,
         setAllCategoryBtn,
+        favoriteList,
+        setFavoriteList,
       } }
     >
       {children}
