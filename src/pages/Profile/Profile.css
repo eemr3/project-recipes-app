@@ -18,7 +18,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  width: 100%;;
+  width: 100%;
 }
 
 .content-buttons button {
@@ -37,7 +37,7 @@
 }
 
 .user-email {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial , Helvetica , sans-serif;
   font-size: 1.1rem;
   font-weight: 600;
   margin: 10px 0;
