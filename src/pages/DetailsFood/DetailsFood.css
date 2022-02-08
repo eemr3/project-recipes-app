@@ -4,8 +4,25 @@
 }
 
 .btn-recipe {
-  border: 3px solid #73ad21;
+  background-color: #fd4d05;
+  border: 1px solid transparent;
   bottom: 0;
-  position: fixed;
-  width: 300px;
+  color: white;
+  font-weight: 600;
+  padding: 5px;
+  width: 100%;
+}
+
+.btn-recipe:hover {
+  background-color: transparent;
+  border: 1px solid #fd4d05;
+  color: rgb(15, 15, 15);
+  font-weight: 600;
+}
+
+@media screen and ( min-width : 600px ) {
+
+  .btn-recipe {
+    width: 400px;
+  }
 }

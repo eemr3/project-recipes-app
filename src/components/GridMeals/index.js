@@ -51,7 +51,7 @@ function GridMeals() {
                   strMeal,
                 }, index) => (
                   <CardResults
-                    key={ idMeal }
+                    key={ index }
                     index={ index }
                     image={ strMealThumb }
                     name={ strMeal }

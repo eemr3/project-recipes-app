@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function CardInProgressFooter({
-  title,
+  titleRecipe,
   category,
   instructions,
   dataTestIdTitle,
@@ -10,8 +10,8 @@ function CardInProgressFooter({
   dataTestIdInstruction,
 }) {
   return (
-    <footer>
-      <h1 data-testid={ dataTestIdTitle }>{title}</h1>
+    <footer style={ { padding: '10px' } }>
+      <h1 data-testid={ dataTestIdTitle }>{titleRecipe}</h1>
       <p data-testid={ dataTestIdCategory }>{category}</p>
       <p
         data-testid={ dataTestIdInstruction }
@@ -29,11 +29,11 @@ CardInProgressFooter.propTypes = {
   dataTestIdTitle: PropTypes.string.isRequired,
   dataTestIdCategory: PropTypes.string.isRequired,
   dataTestIdInstruction: PropTypes.string.isRequired,
-  title: PropTypes.string,
+  titleRecipe: PropTypes.string,
 };
 
 CardInProgressFooter.defaultProps = {
-  title: '',
+  titleRecipe: '',
   category: '',
   instructions: '',
 };

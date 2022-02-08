@@ -1,0 +1,17 @@
+.btn-primary {
+  background-color: #fd4d05;
+  border-color: #fd4d05;
+  color: #fff;
+  width: 100%;
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: #fd4d05;
+  border-color: #fd4d05;
+  color: #fff;
+}
+
+li {
+  list-style: none;
+  padding: 10px;
+}

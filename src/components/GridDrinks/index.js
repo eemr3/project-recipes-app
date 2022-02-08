@@ -55,7 +55,7 @@ function GridDrinks() {
                 <CardResults
                   recipe={ strInstructions }
                   index={ index }
-                  key={ idDrink }
+                  key={ index }
                   name={ strDrink }
                   image={ strDrinkThumb }
                   mealId={ idDrink }

@@ -8,7 +8,7 @@ import './Footer.css';
 
 function Footer() {
   return (
-    <footer data-testid="footer" className="meunu-inferior">
+    <footer data-testid="footer" className="menu-inferior">
       <Link
         to="/drinks"
       >
@@ -21,6 +21,7 @@ function Footer() {
       </Link>
       <Link
         to="/explore"
+        className="footer-icons__middle"
       >
         <img
           data-testid="explore-bottom-btn"

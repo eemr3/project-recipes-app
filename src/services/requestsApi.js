@@ -168,8 +168,9 @@ export const mockfavorites = () => {
       type: 'drinks',
     },
   ];
-  localStorage.setItem('favoriteRecipe', JSON.stringify(object));
 
+  localStorage.setItem('favoriteRecipe', JSON.stringify(object));
+};
 export const requestDetailsDrinks = async (idDrink) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`;
   try {

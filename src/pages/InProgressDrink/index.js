@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Container, ListGroup } from 'react-bootstrap';
+import { Button, ListGroup } from 'react-bootstrap';
 import { requestCocktailById } from '../../services/requestsApi';
 import InprogressContext from '../../context/InprogressContext';
 import CardInProgressHeader from '../../components/CardInProgressHeader';
@@ -54,7 +54,7 @@ function InProgressDrink({ match }) {
 
   return (
     igredientsMeasures.length > 0 ? (
-      <Container>
+      <div>
         <CardInProgressHeader
           image={ getRecipeForRende.strDrinkThumb }
           title={ getRecipeForRende.strDrink }
@@ -78,6 +78,7 @@ function InProgressDrink({ match }) {
         </ListGroup>
         <CardInProgressFooter
           dataTestIdTitle="recipe-title"
+          titleRecipe={ getRecipeForRende.strDrink }
           category={ getRecipeForRende.strCategory }
           instructions={ getRecipeForRende.strInstructions }
           dataTestIdCategory="recipe-category"
@@ -91,9 +92,8 @@ function InProgressDrink({ match }) {
           disabled={ isDisabled }
         >
           Finalizar receita
-
         </Button>
-      </Container>
+      </div>
 
     ) : (<p>Loading...</p>)
 

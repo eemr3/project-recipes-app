@@ -36,27 +36,29 @@ function ListIngredientsInProgress({
   }, [id, igredient, location.pathname, setCountCheckd]);
 
   return (
-    <li>
-      <label
-        data-testid={ dataTestIdIg }
-        htmlFor={ `${index}-${igredient}` }
-        style={ { textDecoration: checkThrough ? 'line-through' : '' } }
-      >
-        <input
-          onChange={ handleChangeCheck }
-          type="checkbox"
-          name={ `${igredient},${measure}` }
-          id={ `${index}-${igredient}` }
-          defaultChecked={ checkThrough }
-        />
-        {igredient}
-        {' '}
-        -
-        {' '}
-        {measure}
-      </label>
-
-    </li>
+    <div>
+      <li>
+        <label
+          data-testid={ dataTestIdIg }
+          htmlFor={ `${index}-${igredient}` }
+          style={ { textDecoration: checkThrough ? 'line-through' : '' } }
+        >
+          <input
+            style={ { marginRight: '4px' } }
+            onChange={ handleChangeCheck }
+            type="checkbox"
+            name={ `${igredient},${measure}` }
+            id={ `${index}-${igredient}` }
+            defaultChecked={ checkThrough }
+          />
+          {igredient}
+          {' '}
+          -
+          {' '}
+          {measure}
+        </label>
+      </li>
+    </div>
   );
 }
 

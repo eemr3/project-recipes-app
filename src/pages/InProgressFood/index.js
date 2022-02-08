@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Button, Container } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { requestMealById } from '../../services/requestsApi';
 import CardInProgressFooter from '../../components/CardInProgressFooter';
 import CardInProgressHeader from '../../components/CardInProgressHeader';
 import InprogressContext from '../../context/InprogressContext';
 import ListIngredientsInProgress from '../../components/ListIngredientsInProgress';
+
+import './InProgressFood.css';
 
 function InProgressFood({ match }) {
   const {
@@ -50,7 +52,7 @@ function InProgressFood({ match }) {
 
   return (
     igredientsMeasures.length > 0 ? (
-      <Container>
+      <div>
         <CardInProgressHeader
           image={ getRecipeForRende.strMealThumb }
           title={ getRecipeForRende.strMeal }
@@ -61,6 +63,7 @@ function InProgressFood({ match }) {
         <div>
           {igredientsMeasures.map((igred, index) => (
             <ListIngredientsInProgress
+              titleRecipe={ getRecipeForRende.strMeal }
               key={ `${igred[0]}${igred[1]}` }
               igredient={ igred[0] }
               measure={ igred[1] }
@@ -72,6 +75,7 @@ function InProgressFood({ match }) {
           ))}
         </div>
         <CardInProgressFooter
+          titleRecipe={ getRecipeForRende.strMeal }
           dataTestIdTitle="recipe-title"
           category={ getRecipeForRende.strCategory }
           instructions={ getRecipeForRende.strInstructions }
@@ -83,10 +87,11 @@ function InProgressFood({ match }) {
           data-testid="finish-recipe-btn"
           onClick={ () => history.push('/done-recipes') }
           disabled={ isDisabled }
+          className="btn-finish"
         >
           Finalizar receita
         </Button>
-      </Container>
+      </div>
 
     ) : (<p>Loading...</p>)
 

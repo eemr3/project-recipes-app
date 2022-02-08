@@ -10,6 +10,13 @@ function RecomendedCard({ foods, index, str, thumb, link }) {
         key={ index }
         data-testid={ `${index}-recomendation-card` }
         className="containerCardRecomendation"
+        style={ {
+          display: 'flex',
+          flexDirection: 'column',
+          marginBottom: '70px',
+          marginRight: '3px',
+          color: 'rgb(228, 28, 21)',
+        } }
       >
         <img
           src={ foods[thumb] }

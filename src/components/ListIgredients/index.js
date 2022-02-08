@@ -25,7 +25,7 @@ function ListIgredients({
   };
 
   return (
-    <li data-testid={ dataTestIdIg }>
+    <li data-testid={ dataTestIdIg } style={ { listStyle: 'none', padding: '10px' } }>
       <label
         htmlFor={ `${index}-step` }
         style={ { textDecoration: checkThrough ? 'line-through' : '' } }

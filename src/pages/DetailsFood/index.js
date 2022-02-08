@@ -77,45 +77,47 @@ function DetailsFood() {
   }
 
   return (
-    <div className="container">
-      <div>
-        <CardDetailsandProgress
-          image={ arrayDetailsFoods.strMealThumb }
-          title={ arrayDetailsFoods.strMeal }
-          category={ arrayDetailsFoods.strCategory }
-          instructions={ arrayDetailsFoods.strInstructions }
-          dataTestIdTitle="recipe-title"
-          dataTestImg="recipe-photo"
-          dataTestIdCategory="recipe-category"
-          dataTestIdInstruction="instructions"
-          className="arrayDetailsFoods"
-          recipe={ arrayDetailsFoods }
-        />
-        <section>
-          { renderIngredients() }
-        </section>
-        <section className="recomended-conteiner">
-          { renderRecomendation() }
-        </section>
-        <section>
-          {Object.values(arrayDetailsFoods).length > 0 ? (
-            <iframe
-              src={ arrayDetailsFoods.strYoutube
-                .replace('\\/', '//').replace('/watch?v=', '/embed/') }
-              title="W3Scho"
-              data-testid="video"
-            />
-          ) : ''}
-        </section>
-        <button
-          className="btn-recipe"
-          type="button"
-          data-testid="start-recipe-btn"
-          onClick={ () => history.push(`/foods/${id}/in-progress`) }
-        >
-          Start Recipe
-        </button>
-      </div>
+    <div>
+
+      <CardDetailsandProgress
+        image={ arrayDetailsFoods.strMealThumb }
+        title={ arrayDetailsFoods.strMeal }
+        category={ arrayDetailsFoods.strCategory }
+        instructions={ arrayDetailsFoods.strInstructions }
+        dataTestIdTitle="recipe-title"
+        dataTestImg="recipe-photo"
+        dataTestIdCategory="recipe-category"
+        dataTestIdInstruction="instructions"
+        className="arrayDetailsFoods"
+        recipe={ arrayDetailsFoods }
+      />
+      <section>
+        { renderIngredients() }
+      </section>
+      <section
+        style={ { width: '100%', textAlign: 'center', margin: '5px' } }
+      >
+        {Object.values(arrayDetailsFoods).length > 0 ? (
+          <iframe
+            src={ arrayDetailsFoods.strYoutube
+              .replace('\\/', '//').replace('/watch?v=', '/embed/') }
+            title="W3Scho"
+            data-testid="video"
+          />
+        ) : ''}
+      </section>
+      <section className="recomended-conteiner">
+        { renderRecomendation() }
+      </section>
+      <button
+        className="btn-recipe"
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => history.push(`/foods/${id}/in-progress`) }
+      >
+        Start Recipe
+      </button>
+    </div>
   );
 }
 

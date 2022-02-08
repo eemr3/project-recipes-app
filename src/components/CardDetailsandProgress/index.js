@@ -32,14 +32,19 @@ function CardDetailsandProgress({
   };
 
   return (
-    <div>
+    <div style={ { padding: '10px' } }>
       {show ? (
         <Alert variant="success" onClose={ () => setShow(false) } dismissible>
           <Alert.Heading>Link copied!</Alert.Heading>
         </Alert>
       ) : null}
       <div>
-        <img data-testid={ dataTestImg } src={ image } alt={ title } />
+        <img
+          data-testid={ dataTestImg }
+          src={ image }
+          alt={ title }
+          style={ { marginTop: '8px', width: '95%' } }
+        />
       </div>
       <div>
         <img

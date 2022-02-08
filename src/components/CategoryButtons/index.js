@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Container, Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+
+import './CategoryButtons.css';
 
 const FIVE = 5;
 function CategoryButtons({
@@ -11,14 +13,15 @@ function CategoryButtons({
   setAllCategory,
 }) {
   return (
-    <Container>
+    <div className="category-button-container">
       <Button
         data-testid="All-category-filter"
         type="button"
         onClick={ () => setAllCategory('All') }
+        className="btn-all"
+        variant="outline-danger"
       >
         All
-
       </Button>
       {
         categoryBtn.length > 0 ? categoryBtn.slice(0, FIVE).map((item) => (
@@ -27,6 +30,7 @@ function CategoryButtons({
             key={ item.strCategory }
             type="button"
             name={ item.strCategory }
+            variant="warning"
             onClick={ (e) => {
               handleClickCategory(item.strCategory);
               setToggle(item.strCategory);
@@ -34,12 +38,13 @@ function CategoryButtons({
               setAllCategory(e.target.name);
             } }
           >
-            {item.strCategory}
+            {item.strCategory.includes('Unknown') ? item.strCategory.split('/')[0]
+              : item.strCategory.split(' ')[0]}
 
           </Button>
         )) : <Spinner className="align-middle" animation="border" role="status" />
       }
-    </Container>
+    </div>
   );
 }
 

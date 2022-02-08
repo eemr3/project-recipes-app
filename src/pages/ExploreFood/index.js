@@ -22,33 +22,34 @@ function ExploreFood() {
         name="Explore Foods"
         enableSearch={ false }
       />
-      <h1>Explore Foods</h1>
-      <button
-        type="button"
-        onClick={ () => history
-          .push('/explore/foods/ingredients') }
-        data-testid="explore-by-ingredient"
-      >
-        By Ingredient
+      <div className="container-buttons-exp-foods">
+        <button
+          type="button"
+          onClick={ () => history
+            .push('/explore/foods/ingredients') }
+          data-testid="explore-by-ingredient"
+        >
+          By Ingredient
 
-      </button>
-      <button
-        type="button"
-        onClick={ () => history
-          .push('/explore/foods/nationalities') }
-        data-testid="explore-by-nationality"
-      >
-        By Nationality
+        </button>
+        <button
+          type="button"
+          onClick={ () => history
+            .push('/explore/foods/nationalities') }
+          data-testid="explore-by-nationality"
+        >
+          By Nationality
 
-      </button>
-      <button
-        onClick={ handleRequestSurprise }
-        type="button"
-        data-testid="explore-surprise"
-      >
-        Surprise me!
+        </button>
+        <button
+          onClick={ handleRequestSurprise }
+          type="button"
+          data-testid="explore-surprise"
+        >
+          Surprise me!
 
-      </button>
+        </button>
+      </div>
       <Footer />
     </div>
   );

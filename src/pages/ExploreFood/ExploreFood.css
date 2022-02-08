@@ -8,3 +8,21 @@
 .header-explorefood-content span {
   flex: auto;
 }
+
+.header-explorefood-content h1 {
+  margin-left: 20px;
+}
+.container-buttons-exp-foods {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.container-buttons-exp-foods button {
+  background-color: #fd4d05;
+  border: 1px solid transparent;
+  color: white;
+  margin-right: 5px;
+  padding: 5px;
+}

@@ -28,14 +28,14 @@ export const getLocalStorageInProgress = (params) => {
 
   switch (route) {
   case 'drinks':
-    if (itemLST && itemLST.cocktails) {
+    if (itemLST && itemLST.cocktails && itemLST.cocktails[id]) {
       setCheckThrough(itemLST.cocktails[id]
         .some((item) => item.includes(igredient)));
       setCountCheckd(itemLST.cocktails[id].length);
     }
     break;
   case 'foods':
-    if (itemLST && itemLST.meals) {
+    if (itemLST && itemLST.meals && itemLST.meals[id]) {
       setCheckThrough(itemLST.meals[id]
         .some((item) => item.includes(igredient)));
     }

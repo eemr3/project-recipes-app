@@ -3,9 +3,9 @@ import copy from 'clipboard-copy';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
 import ShareIcons from '../../images/shareIcon.svg';
-// import BlackHeartIcon from '../../images/blackHeartIcon.svg';
-// import BhiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import FavoriteButton from '../FavoriteButton/FavoriteButton';
+
+import './CardInProgressHeader.css';
 
 function CardInProgressHeader({
   image,
@@ -33,7 +33,7 @@ function CardInProgressHeader({
       <div>
         <img data-testid={ dataTestImg } src={ image } alt={ title } width="100%" />
       </div>
-      <div>
+      <div className="card-inprogress-header-icons">
         <img
           src={ ShareIcons }
           alt="share icon"

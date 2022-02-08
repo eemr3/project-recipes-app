@@ -1,0 +1,14 @@
+header {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+img {
+  margin: 2px 0;
+}
+
+.card-inprogress-header-icons {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}

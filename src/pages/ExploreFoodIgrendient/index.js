@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Card, CardGroup, Col, Container, Spinner } from 'react-bootstrap';
 import Header from '../../components/Header/Header';
 import { requestAllIngredients } from '../../services/requestsApi';
-// import { Container } from './styles';
 import Footer from '../../components/Footer';
 import AppContext from '../../context/AppContext';
 
@@ -27,32 +27,46 @@ function ExploreFoodIgrendient() {
   const DOZE = 12;
   return (
     <div>
-      <Header name="Explore Ingredients" enableSearch={ false } />
-      <h1>Explore Food Igrendient</h1>
-      {
-        arrayIngredients.length
-          ? arrayIngredients
-            .slice(0, DOZE)
-            .map(({ strIngredient }, index) => (
-              <div key={ index } data-testid={ `${index}-recipe-card` }>
-                <button
-                  data-testid={ `${index}-ingredient-card` }
-                  type="button"
-                  onClick={ (e) => handleIngredient(e) }
-                >
-                  <img
-                    src={
-                      `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png`
-                    }
-                    alt="food-logo"
-                    data-testid={ `${index}-card-img` }
-                    name={ strIngredient }
-                  />
-                  <h4 data-testid={ `${index}-card-name` }>{strIngredient}</h4>
-                </button>
-              </div>
-            )) : <p>OI</p>
-      }
+      <Header
+        name="Explore Ingredients"
+        enableSearch={ false }
+        classNameContent="header-ExploreFoodIgrendient-content"
+      />
+      <Container mt={ 3 } className="mt-4 mb-5 text-center">
+        {
+          arrayIngredients.length
+            ? arrayIngredients
+              .slice(0, DOZE)
+              .map(({ strIngredient }, index) => (
+
+                <CardGroup key={ index } className="mb-2">
+                  <Col>
+                    <Card
+                      data-testid={ `${index}-ingredient-card` }
+                      onClick={ (e) => handleIngredient(e) }
+                    >
+                      <Card.Img
+                        variant="top"
+                        src={ `https://www.themealdb.com/images/ingredients/${strIngredient}-Small.png` }
+                        data-testid={ `${index}-card-img` }
+                        alt="food-logo"
+                        name={ strIngredient }
+                      />
+                      <Card.Body>
+                        <Card.Title
+                          data-testid={ `${index}-card-name` }
+                          style={ { color: '#fd4d05' } }
+                        >
+                          {strIngredient}
+
+                        </Card.Title>
+                      </Card.Body>
+                    </Card>
+                  </Col>
+                </CardGroup>
+              )) : <Spinner animation="border" role="status" />
+        }
+      </Container>
       <Footer />
     </div>
   );

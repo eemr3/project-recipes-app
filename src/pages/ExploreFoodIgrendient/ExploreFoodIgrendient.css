@@ -5,6 +5,11 @@
   width: 100%;
 }
 
+.header-ExploreFoodIgrendient-content h1 {
+  font-size: 1.8rem;
+  margin-left: 5px;
+}
+
 .header-ExploreFoodIgrendient-content span {
   flex: auto;
 }

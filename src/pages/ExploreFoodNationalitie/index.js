@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Container, Row, CardGroup, Spinner } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  CardGroup,
+  Spinner,
+} from 'react-bootstrap';
 import CardResults from '../../components/cardsResult/Card';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer';
 import { requestAllNationality, requestByNationality } from '../../services/requestsApi';
 import AppContext from '../../context/AppContext';
-/* import GridMeals from '../../components/GridMeals'; */
 
 import './ExploreFoodNationalitie.css';
 
@@ -43,24 +47,24 @@ function ExploreFoodNationalitie() {
         name="Explore Nationalities"
         enableSearch
       />
-      <h1>Explore Food Nationalitie</h1>
-
-      <select
-        data-testid="explore-by-nationality-dropdown"
-        onChange={ ({ target }) => handleSelectedNationalites(target) }
-      >
-        <option data-testid="All-option">All</option>
-        {
-          allNationality.length >= 1
-            ? allNationality.map(({ strArea }, index) => (
-              <option
-                data-testid={ `${strArea}-option` }
-                key={ index }
-              >
-                {strArea}
-              </option>)) : <option>oI</option>
-        }
-      </select>
+      <div className="content-select">
+        <select
+          data-testid="explore-by-nationality-dropdown"
+          onChange={ ({ target }) => handleSelectedNationalites(target) }
+        >
+          <option data-testid="All-option">All</option>
+          {
+            allNationality.length >= 1
+              ? allNationality.map(({ strArea }, index) => (
+                <option
+                  data-testid={ `${strArea}-option` }
+                  key={ index }
+                >
+                  {strArea}
+                </option>)) : <option>oI</option>
+          }
+        </select>
+      </div>
       <Container mt={ 3 } className="mt-4 mb-5 text-center">
         {newArray.length > 0
           ? (

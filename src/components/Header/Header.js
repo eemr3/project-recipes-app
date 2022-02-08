@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Button, Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 import profile from '../../images/profileIcon.svg';
 import searchImage from '../../images/searchIcon.svg';
@@ -23,14 +23,24 @@ function Header(props) {
   return (
     <header className="header-container">
       <div className={ classNameContent }>
-        <Link to="/profile" type="button">
-          <img src={ profile } alt="profile" data-testid="profile-top-btn" />
+        <Link to="/profile">
+          <img
+            src={ profile }
+            alt="profile"
+            data-testid="profile-top-btn"
+            className="header-icons"
+          />
         </Link>
-        <span data-testid="page-title">{name}</span>
+        <h1 className="header-title" data-testid="page-title">{name}</h1>
         {enableSearch ? (
-          <Button variant="link" type="button" onClick={ validaSearchBar }>
-            <img src={ searchImage } alt="search" data-testid="search-top-btn" />
-          </Button>
+          <img
+            src={ searchImage }
+            alt="search"
+            data-testid="search-top-btn"
+            onClick={ validaSearchBar }
+            aria-hidden="true"
+            style={ { cursor: 'pointer' } }
+          />
         ) : (
           ''
         )}

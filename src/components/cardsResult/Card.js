@@ -13,7 +13,13 @@ export default function CardResults({
         <Card>
           <Card.Img variant="top" src={ image } data-testid={ `${index}-card-img` } />
           <Card.Body>
-            <Card.Title data-testid={ `${index}-card-name` }>{name}</Card.Title>
+            <Card.Title
+              data-testid={ `${index}-card-name` }
+              style={ { color: '#fd4d05' } }
+            >
+              {name}
+
+            </Card.Title>
           </Card.Body>
         </Card>
       </Col>
@@ -22,9 +28,17 @@ export default function CardResults({
 }
 
 CardResults.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  mealId: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  index: PropTypes.number,
+  mealId: PropTypes.string,
+  url: PropTypes.string,
+};
+
+CardResults.defaultProps = {
+  image: '',
+  name: '',
+  index: 0,
+  mealId: '',
+  url: '',
 };
