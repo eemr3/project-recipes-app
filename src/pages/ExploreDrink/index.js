@@ -1,7 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header/Header';
-// import { Container } from './styles';
 import Footer from '../../components/Footer';
 import { requestSurprise } from '../../services/requestsApi';
 
@@ -21,25 +20,26 @@ function ExploreDrink() {
         name="Explore Drinks"
         enableSearch={ false }
       />
-      <h1>Explore Drink</h1>
-      <button
-        onClick={ () => history
-          .push('/explore/drinks/ingredients') }
-        type="button"
-        data-testid="explore-by-ingredient"
-      >
-        By Ingredient
+      <div className="container-buttons-exp-drinks">
+        <button
+          onClick={ () => history
+            .push('/explore/drinks/ingredients') }
+          type="button"
+          data-testid="explore-by-ingredient"
+        >
+          By Ingredient
 
-      </button>
+        </button>
 
-      <button
-        onClick={ handleRequestSurprise }
-        type="button"
-        data-testid="explore-surprise"
-      >
-        Surprise me!
+        <button
+          onClick={ handleRequestSurprise }
+          type="button"
+          data-testid="explore-surprise"
+        >
+          Surprise me!
 
-      </button>
+        </button>
+      </div>
       <Footer />
     </div>
   );

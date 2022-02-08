@@ -52,6 +52,7 @@ function Header(props) {
             onChange={ ({ target }) => handleInputHeader(target.value) }
             type="text"
             data-testid="search-input"
+            style={ { width: '100%', border: '1px solid #fd4d05' } }
           />
           <SearchBarHeader />
         </Container>

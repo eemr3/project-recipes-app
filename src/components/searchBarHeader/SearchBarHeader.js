@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import { useLocation } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { requestByRadioChoice } from '../../services/requestsApi';
@@ -55,7 +55,7 @@ export default function SearchBarHeader() {
   );
 
   return (
-    <Container>
+    <div>
       <Form>
         {['radio'].map((type) => (
           <div key={ `inline-${type}` } className="mb-3">
@@ -89,7 +89,8 @@ export default function SearchBarHeader() {
             <Button
               name="search-input"
               data-testid="exec-search-btn"
-              variant="outline-dark"
+              variant="danger"
+              style={ { backgroundColor: '#fd4d05' } }
               onClick={ handleRequestApi }
             >
               Search
@@ -97,6 +98,6 @@ export default function SearchBarHeader() {
           </div>
         ))}
       </Form>
-    </Container>
+    </div>
   );
 }

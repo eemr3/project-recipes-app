@@ -27,8 +27,9 @@ function DetailsFood() {
   useEffect(() => {
     function fetchRecipe() {
       requestDetailsFoods(id).then((response) => {
-        setArrayDetailsFoods(...response.meals);
-      });
+        const teste = response.meals[0];
+        setArrayDetailsFoods(teste);
+      }).catch((error) => console.log(error));
     }
     fetchRecipe();
   }, [id]);

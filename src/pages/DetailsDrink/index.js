@@ -5,8 +5,6 @@ import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import ListIgredients from '../../components/ListIgredients';
 import RecomendedCard from '../../components/RecomendedCard';
 
-// import { Container } from './styles';
-
 function DetailsDrink() {
   const [foodData, setFoodData] = useState([]);
   const [arrayDetailsDrinks, setArrayDetailsDrinks] = useState({});

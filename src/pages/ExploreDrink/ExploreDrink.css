@@ -5,6 +5,25 @@
   width: 100%;
 }
 
+.header-exploredrink-content h1 {
+  margin-left: 20px;
+}
+
 .header-exploredrink-content span {
   flex: auto;
+}
+
+.container-buttons-exp-drinks {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.container-buttons-exp-drinks button {
+  background-color: #fd4d05;
+  border: 1px solid transparent;
+  color: white;
+  margin-right: 5px;
+  padding: 5px;
 }

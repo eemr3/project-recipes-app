@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import { CardGroup, Container, Row, Card, Col, Button } from 'react-bootstrap';
 import useLocalStorage from '../../../context/hooks/useLocalStorage';
-import { requestById } from '../../../services/requestsApi';
+// import { requestById } from '../../../services/requestsApi';
 
 export default function RecipeDoneCard() {
-  const [storageInProgress, setStorageInProgress] = useState([]);
+  // const [storageInProgress, setStorageInProgress] = useState([]);
   const [drinkFilter, setDrinkfilter] = useState([]);
   const [mealFilter, setMealFilter] = useState([]);
   const [mapArray, setMapArray] = useState([]);
   const [doneRecipe, setDoneRecipe] = useLocalStorage('doneRecipe', []);
-  const location = useLocation();
+  // const location = useLocation();
   const FIFTY_THOUSAND = 50000;
-  useEffect(() => {
-    setStorageInProgress(
-      Object.keys({
-        ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
-        ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails,
-      }),
-    );
-  }, []);
+  // useEffect(() => {
+  //   setStorageInProgress(
+  //     Object.keys({
+  //       ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
+  //       ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails,
+  //     }),
+  //   );
+  // }, []);
 
-  useEffect(() => {
-    let newArray = [];
-    storageInProgress
-      .forEach((id) => requestById(id)
-        .then((values) => {
-          newArray = [...newArray, values];
-          setDoneRecipe(newArray);
-        }));
-    console.log(location.pathname);
-  }, [storageInProgress]);
+  // useEffect(() => {
+  //   let newArray = [];
+  //   storageInProgress
+  //     .forEach((id) => requestById(id)
+  //       .then((values) => {
+  //         newArray = [...newArray, values];
+  //         setDoneRecipe(newArray);
+  //       }));
+  //   console.log(location.pathname);
+  // }, [storageInProgress]);
 
   useEffect(() => {
     const handleMap = () => {
