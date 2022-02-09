@@ -13,14 +13,14 @@ import {
 } from '../services/requestsApi';
 
 const AppProvider = ({ children }) => {
-  const [toggle, setToggle] = useState(true);
+  const [toggle, setToggle] = useState(false);
   const [getMeals, setGetMeals] = useState([]);
-  const [allCategory, setAllCategory] = useState('');
-  const [nameBtn, setNameBtn] = useState('');
+  const [allCategory, setAllCategory] = useState('All');
   const [categoryButtons, setCategaryButtons] = useState([]);
   const [specifiCategory, setSpecifiCategory] = useState([]);
   const [selectedButton, setSelectedButton] = useState('');
   const [favoriteList, setFavoriteList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const handleSectedButton = (id) => {
     setSelectedButton(id);
   };
@@ -79,8 +79,10 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (location.pathname === '/drinks') {
       const getDrinksData = async () => {
+        setIsLoading(true);
         const response = await requestAllDrinks();
         setGetMeals(response);
+        setIsLoading(false);
       };
       const getCategoryBtnMeals = async () => {
         const response = await requestCategoriesDrinks();
@@ -91,9 +93,11 @@ const AppProvider = ({ children }) => {
     } else if (
       location.pathname === '/foods'
       || location.pathname === '/explore/foods/nationalities') {
+      setIsLoading(true);
       const getMealsData = async () => {
         const response = await requestAllFoods();
         setGetMeals(response.meals);
+        setIsLoading(false);
       };
       const getCategoryBtnDrink = async () => {
         const response = await requestCategoriesMeals();
@@ -115,18 +119,14 @@ const AppProvider = ({ children }) => {
   };
 
   const setAllCategoryBtn = (category) => {
-    setAllCategory(category);
-  };
-
-  const toggleBtnCategory = (value) => {
-    if (nameBtn === value) {
-      setToggle(!toggle);
-    }
+    setAllCategory((prev) => (prev === category ? 'All' : category));
+    setToggle(allCategory === category);
   };
 
   return (
     <AppContext.Provider
       value={ {
+        toggle,
         handleSectedButton,
         selectedButton,
         handleInputHeader,
@@ -137,16 +137,15 @@ const AppProvider = ({ children }) => {
         handleIngredientsFilter,
         getMeals,
         categoryButtons,
-        setNameBtn,
         specifiCategory,
         getSpecificCategories,
-        toggleBtnCategory,
-        toggle,
         setAllCategory,
         allCategory,
         setAllCategoryBtn,
         favoriteList,
         setFavoriteList,
+        setSpecifiCategory,
+        isLoading,
       } }
     >
       {children}

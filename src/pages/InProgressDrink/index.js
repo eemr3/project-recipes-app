@@ -72,7 +72,7 @@ function InProgressDrink({ match }) {
               idDrink={ getRecipeForRende.idDrink }
               isvisibility
               dataTestIdIg={ `${index}-ingredient-step` }
-              igredientsMeasures={ igredientsMeasures }
+              getRecipeForRende={ getRecipeForRende }
             />
           ))}
         </ListGroup>

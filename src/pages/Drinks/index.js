@@ -11,8 +11,6 @@ function Drinks() {
   const {
     categoryButtons,
     getSpecificCategories,
-    toggleBtnCategory,
-    setNameBtn,
     setAllCategoryBtn,
   } = useContext(AppContext);
   return (
@@ -25,8 +23,6 @@ function Drinks() {
       <CategoryButtons
         categoryBtn={ categoryButtons }
         handleClickCategory={ getSpecificCategories }
-        setToggle={ toggleBtnCategory }
-        setNameBtn={ setNameBtn }
         setAllCategory={ setAllCategoryBtn }
       />
       <GridDrinks />

@@ -11,30 +11,32 @@ function GridMeals() {
     setArrayMeals,
     getMeals,
     specifiCategory,
+    setSpecifiCategory,
     toggle,
-    toggleBtnCategory,
     allCategory,
   } = useContext(AppContext);
   const [newArrayMeals, setNewArrayMeals] = useState([]);
 
   useEffect(() => {
     const controlArray = () => {
+      if (specifiCategory.length > 0 && toggle === false && allCategory !== 'All') {
+        setNewArrayMeals(specifiCategory);
+      }
       if (arrayMeals.length > 0) {
-        return arrayMeals;
+        setNewArrayMeals(arrayMeals);
       }
-      if (specifiCategory.length !== 0 && toggle && allCategory !== 'All') {
-        return specifiCategory;
+      if (allCategory === 'All') {
+        setNewArrayMeals(getMeals);
       }
-      toggleBtnCategory();
-      return getMeals;
     };
-    setNewArrayMeals(controlArray());
-  }, [arrayMeals, getMeals, specifiCategory, toggle, toggleBtnCategory, allCategory]);
+    controlArray();
+  }, [arrayMeals, getMeals, specifiCategory, toggle, allCategory]);
 
   useEffect(() => () => {
     handleInputHeader('');
     handleSectedButton('');
     setArrayMeals([]);
+    setSpecifiCategory([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

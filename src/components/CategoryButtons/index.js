@@ -8,8 +8,6 @@ const FIVE = 5;
 function CategoryButtons({
   categoryBtn,
   handleClickCategory,
-  setToggle,
-  setNameBtn,
   setAllCategory,
 }) {
   return (
@@ -31,11 +29,9 @@ function CategoryButtons({
             type="button"
             name={ item.strCategory }
             variant="warning"
-            onClick={ (e) => {
+            onClick={ () => {
               handleClickCategory(item.strCategory);
-              setToggle(item.strCategory);
-              setNameBtn(e.target.name);
-              setAllCategory(e.target.name);
+              setAllCategory(item.strCategory);
             } }
           >
             {item.strCategory.includes('Unknown') ? item.strCategory.split('/')[0]
@@ -51,16 +47,12 @@ function CategoryButtons({
 CategoryButtons.propTypes = {
   categoryBtn: PropTypes.arrayOf(PropTypes.shape({})),
   handleClickCategory: PropTypes.func,
-  setToggle: PropTypes.func,
-  setNameBtn: PropTypes.func,
   setAllCategory: PropTypes.func,
 };
 
 CategoryButtons.defaultProps = {
   categoryBtn: [],
   handleClickCategory: () => {},
-  setToggle: () => {},
-  setNameBtn: () => {},
   setAllCategory: () => {},
 };
 

@@ -11,7 +11,7 @@ function ListIngredientsInProgress({
   index,
   idDrink,
   dataTestIdIg,
-
+  // getRecipeForRende,
 }) {
   const { setCountCheckd } = useContext(InprogressContext);
   const [checkThrough, setCheckThrough] = useState(false);

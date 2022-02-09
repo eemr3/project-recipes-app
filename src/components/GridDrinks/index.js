@@ -12,8 +12,8 @@ function GridDrinks() {
     setArrayMeals,
     getMeals,
     specifiCategory,
+    setSpecifiCategory,
     toggle,
-    toggleBtnCategory,
     allCategory,
   } = useContext(AppContext);
 
@@ -21,22 +21,22 @@ function GridDrinks() {
 
   useEffect(() => {
     const controlArray = () => {
+      if (specifiCategory.length > 0 && toggle === false && allCategory !== 'All') {
+        return specifiCategory;
+      }
       if (arrayMeals.length > 0) {
         return arrayMeals;
       }
-      if (specifiCategory.length !== 0 && toggle && allCategory !== 'All') {
-        return specifiCategory;
-      }
-      toggleBtnCategory();
       return getMeals;
     };
     setNewArrayMeals(controlArray());
-  }, [arrayMeals, getMeals, specifiCategory, toggle, toggleBtnCategory, allCategory]);
+  }, [arrayMeals, getMeals, specifiCategory, toggle, allCategory]);
 
   useEffect(() => () => {
     handleInputHeader('');
     handleSectedButton('');
     setArrayMeals([]);
+    setSpecifiCategory([]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

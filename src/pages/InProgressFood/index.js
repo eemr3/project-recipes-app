@@ -71,6 +71,7 @@ function InProgressFood({ match }) {
               idDrink={ getRecipeForRende.idMeal }
               dataTestIdIg={ `${index}-ingredient-step` }
               isvisibility
+              getRecipeForRende={ getRecipeForRende }
             />
           ))}
         </div>

@@ -10,9 +10,7 @@ import CategoryButtons from '../../components/CategoryButtons';
 function Foods() {
   const { categoryButtons,
     getSpecificCategories,
-    toggleBtnCategory,
     setAllCategoryBtn,
-    setNameBtn,
   } = useContext(AppContext);
   return (
     <div>
@@ -24,8 +22,6 @@ function Foods() {
       <CategoryButtons
         categoryBtn={ categoryButtons }
         handleClickCategory={ getSpecificCategories }
-        setToggle={ toggleBtnCategory }
-        setNameBtn={ setNameBtn }
         setAllCategory={ setAllCategoryBtn }
       />
       <GridMeals />
