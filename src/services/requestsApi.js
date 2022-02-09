@@ -41,16 +41,24 @@ export const requestCategoriesDrinks = async () => {
 
 export const requestSpecificCategoryOfFood = async (foods) => {
   const URL = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${foods}`;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data.meals;
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.meals;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const requestSpecificCategoryOfDrinks = async (drinks) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${drinks}`;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data.drinks;
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const requestAllNationality = async () => {
