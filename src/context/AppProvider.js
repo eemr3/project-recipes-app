@@ -20,7 +20,6 @@ const AppProvider = ({ children }) => {
   const [specifiCategory, setSpecifiCategory] = useState([]);
   const [selectedButton, setSelectedButton] = useState('');
   const [favoriteList, setFavoriteList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const handleSectedButton = (id) => {
     setSelectedButton(id);
   };
@@ -79,10 +78,8 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (location.pathname === '/drinks') {
       const getDrinksData = async () => {
-        setIsLoading(true);
         const response = await requestAllDrinks();
         setGetMeals(response);
-        setIsLoading(false);
       };
       const getCategoryBtnMeals = async () => {
         const response = await requestCategoriesDrinks();
@@ -93,11 +90,9 @@ const AppProvider = ({ children }) => {
     } else if (
       location.pathname === '/foods'
       || location.pathname === '/explore/foods/nationalities') {
-      setIsLoading(true);
       const getMealsData = async () => {
         const response = await requestAllFoods();
         setGetMeals(response.meals);
-        setIsLoading(false);
       };
       const getCategoryBtnDrink = async () => {
         const response = await requestCategoriesMeals();
@@ -145,7 +140,6 @@ const AppProvider = ({ children }) => {
         favoriteList,
         setFavoriteList,
         setSpecifiCategory,
-        isLoading,
       } }
     >
       {children}

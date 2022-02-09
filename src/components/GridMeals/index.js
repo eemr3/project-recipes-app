@@ -15,17 +15,16 @@ function GridMeals() {
     toggle,
     allCategory,
   } = useContext(AppContext);
+
   const [newArrayMeals, setNewArrayMeals] = useState([]);
 
   useEffect(() => {
     const controlArray = () => {
       if (specifiCategory.length > 0 && toggle === false && allCategory !== 'All') {
         setNewArrayMeals(specifiCategory);
-      }
-      if (arrayMeals.length > 0) {
+      } else if (arrayMeals.length > 0) {
         setNewArrayMeals(arrayMeals);
-      }
-      if (allCategory === 'All') {
+      } else if (allCategory === 'All') {
         setNewArrayMeals(getMeals);
       }
     };
