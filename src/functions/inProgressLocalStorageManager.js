@@ -1,4 +1,4 @@
-export const localStorageManager = (target, idDrink, type, prev) => {
+export const localStorageManager = (target = '', idDrink, type, prev = '') => {
   const { name } = target;
   const key = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
 

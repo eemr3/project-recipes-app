@@ -6,11 +6,13 @@ import ListIgredients from '../../components/ListIgredients';
 import RecomendedCard from '../../components/RecomendedCard';
 
 import './DetailsFood.css';
+import validationStorage from '../../functions/validationStorage';
 
 function DetailsFood() {
   const [arrayDetailsFoods, setArrayDetailsFoods] = useState({});
   const [drinkData, setDrinkData] = useState([]);
-
+  // eslint-disable-next-line no-unused-vars
+  const [isVisible, setIsViSible] = useState(false);
   const measurmentKey = [];
   const ingredientsKeys = [];
   const drinkUrl = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
@@ -30,6 +32,9 @@ function DetailsFood() {
         const teste = response.meals[0];
         setArrayDetailsFoods(teste);
       }).catch((error) => console.log(error));
+
+      const itemLS = JSON.parse(localStorage.getItem('doneRecipe')) || [];
+      setIsViSible(itemLS.some((item) => item.id === id) && itemLS.length !== 0);
     }
     fetchRecipe();
   }, [id]);
@@ -77,6 +82,10 @@ function DetailsFood() {
     );
   }
 
+  const continueOrNo = () => {
+    history.push(`/foods/${id}/in-progress`);
+  };
+  console.log(isVisible);
   return (
     <div>
 
@@ -110,14 +119,19 @@ function DetailsFood() {
       <section className="recomended-conteiner">
         { renderRecomendation() }
       </section>
-      <button
-        className="btn-recipe"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ () => history.push(`/foods/${id}/in-progress`) }
-      >
-        Start Recipe
-      </button>
+      {
+        isVisible ? '' : (
+          <button
+            className="btn-recipe"
+            type="button"
+            data-testid="start-recipe-btn"
+            onClick={ continueOrNo }
+          >
+            {validationStorage(id, 'meals') ? 'Continue Recipe' : 'Start Recipe'}
+          </button>
+
+        )
+      }
     </div>
   );
 }

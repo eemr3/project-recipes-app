@@ -4,6 +4,7 @@ import { requestDetailsDrinks } from '../../services/requestsApi';
 import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import ListIgredients from '../../components/ListIgredients';
 import RecomendedCard from '../../components/RecomendedCard';
+import validationStorage from '../../functions/validationStorage';
 
 function DetailsDrink() {
   const [foodData, setFoodData] = useState([]);
@@ -99,7 +100,7 @@ function DetailsDrink() {
             data-testid="start-recipe-btn"
             className="btn-recipe "
           >
-            Start Recipe
+            {validationStorage(id, 'cocktails') ? 'Continue Recipe' : 'Start Recipe'}
           </button>
         </Link>
       </div>

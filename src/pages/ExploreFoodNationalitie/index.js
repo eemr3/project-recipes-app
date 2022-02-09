@@ -40,6 +40,7 @@ function ExploreFoodNationalitie() {
     }
   };
 
+  console.log(filteredByArea);
   return (
     <div>
       <Header
