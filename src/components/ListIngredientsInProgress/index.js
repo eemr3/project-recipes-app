@@ -17,7 +17,6 @@ function ListIngredientsInProgress({
   const [checkThrough, setCheckThrough] = useState(false);
   const location = useLocation();
   const { id } = useParams();
-
   const handleChangeCheck = ({ target }) => {
     const type = location.pathname.includes('/drinks') ? 'cocktails' : 'meals';
     setCheckThrough((prev) => {

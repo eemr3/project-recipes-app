@@ -85,7 +85,7 @@ function DetailsFood() {
   const continueOrNo = () => {
     history.push(`/foods/${id}/in-progress`);
   };
-  console.log(isVisible);
+
   return (
     <div>
 
