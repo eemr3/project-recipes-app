@@ -11,7 +11,6 @@ import validationStorage from '../../functions/validationStorage';
 function DetailsFood() {
   const [arrayDetailsFoods, setArrayDetailsFoods] = useState({});
   const [drinkData, setDrinkData] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [isVisible, setIsViSible] = useState(false);
   const measurmentKey = [];
   const ingredientsKeys = [];
@@ -33,7 +32,7 @@ function DetailsFood() {
         setArrayDetailsFoods(teste);
       }).catch((error) => console.log(error));
 
-      const itemLS = JSON.parse(localStorage.getItem('doneRecipe')) || [];
+      const itemLS = JSON.parse(localStorage.getItem('doneRecipes')) || [];
       setIsViSible(itemLS.some((item) => item.id === id) && itemLS.length !== 0);
     }
     fetchRecipe();

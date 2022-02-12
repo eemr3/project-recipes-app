@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { requestDetailsDrinks } from '../../services/requestsApi';
 import CardDetailsandProgress from '../../components/CardDetailsandProgress';
 import ListIgredients from '../../components/ListIgredients';
@@ -9,6 +9,8 @@ import validationStorage from '../../functions/validationStorage';
 function DetailsDrink() {
   const [foodData, setFoodData] = useState([]);
   const [arrayDetailsDrinks, setArrayDetailsDrinks] = useState({});
+  const [isVisible, setIsViSible] = useState(false);
+  const history = useHistory();
   const measurmentKey = [];
   const ingredientsKeys = [];
   const foodUrl = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
@@ -26,6 +28,9 @@ function DetailsDrink() {
       requestDetailsDrinks(id).then((response) => {
         setArrayDetailsDrinks(...response.drinks);
       });
+
+      const itemLS = JSON.parse(localStorage.getItem('doneRecipes')) || [];
+      setIsViSible(itemLS.some((item) => item.id === id) && itemLS.length !== 0);
     }
     fetchRecipe();
   }, [id]);
@@ -94,15 +99,16 @@ function DetailsDrink() {
         <section className="recomended-conteiner">
           { renderRecomendation() }
         </section>
-        <Link to={ `/drinks/${id}/in-progress` }>
+        {isVisible ? '' : (
           <button
             type="button"
             data-testid="start-recipe-btn"
             className="btn-recipe "
+            onClick={ () => history.push(`/drinks/${id}/in-progress`) }
           >
             {validationStorage(id, 'cocktails') ? 'Continue Recipe' : 'Start Recipe'}
           </button>
-        </Link>
+        )}
       </div>
     </div>
   );
