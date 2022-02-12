@@ -100,40 +100,50 @@ export const requestById = async (id) => {
   const MAGIC = 50000;
 
   if (Number(id) > MAGIC) {
-    const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-    const object1 = await response1.json();
-    const { meals } = object1;
-    const newMeals = { ...meals[0], ...date };
-    const { idMeal, strArea, strMealThumb, strTags, strMeal } = newMeals;
+    try {
+      const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+      const object1 = await response1.json();
+      // console.log(object1);
+      const datameals = object1.meals !== null ? object1.meals : [];
+      // console.log(meals);
+      const newMeals = { ...datameals[0], ...date };
+      const { idMeal, strArea, strCategory, strMealThumb, strTags, strMeal } = newMeals;
 
-    const mealObject = {
-      date: newMeals.data,
-      id: idMeal,
-      image: strMealThumb,
-      name: strMeal,
-      tags: strTags,
-      strArea,
-      route: '/foods',
-    };
-    return mealObject;
+      const mealObject = {
+        doneDate: newMeals.data,
+        id: idMeal,
+        image: strMealThumb,
+        name: strMeal,
+        tags: strTags !== null ? strTags.split(',') : [],
+        nationality: strArea,
+        category: strCategory,
+        type: 'food',
+      };
+      return mealObject;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-  const object2 = await response2.json();
-  const { drinks } = object2;
-  const newDrinks = { ...drinks[0], ...date };
-  const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
-  console.log(newDrinks);
-  const drinkObject = {
-    date: newDrinks.data,
-    id: idDrink,
-    image: strDrinkThumb,
-    tags: strTags,
-    name: strDrink,
-    strAlcoholic,
-    route: '/drinks',
-  };
-  return drinkObject;
+  try {
+    const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+    const object2 = await response2.json();
+    const { drinks } = object2;
+    const newDrinks = { ...drinks[0], ...date };
+    const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
+    const drinkObject = {
+      doneDate: newDrinks.data,
+      id: idDrink,
+      image: strDrinkThumb,
+      tags: strTags !== null ? strTags.split(',') : [],
+      name: strDrink,
+      alcoholicOrNot: strAlcoholic,
+      type: 'drink',
+    };
+    return drinkObject;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const mockfavorites = () => {
@@ -214,7 +224,11 @@ export const requestMealById = async (id) => {
 
 export const requestCocktailById = async (id) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const response = await fetch(URL);
-  const data = await response.json();
-  return data.drinks;
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    return data.drinks;
+  } catch (error) {
+    console.log(error);
+  }
 };

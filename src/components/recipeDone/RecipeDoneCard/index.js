@@ -1,37 +1,44 @@
 import React, { useEffect, useState } from 'react';
-// import { useLocation } from 'react-router-dom';
-import { CardGroup, Container, Row, Card, Col, Button } from 'react-bootstrap';
+import { useLocation } from 'react-router-dom';
+import copy from 'clipboard-copy';
+import { CardGroup, Container, Row, Card, Col, Button, Alert } from 'react-bootstrap';
 import useLocalStorage from '../../../context/hooks/useLocalStorage';
 // import { requestById } from '../../../services/requestsApi';
+import doneRecipeManger from '../../../functions/doneRecipeManager';
+import ShareIcons from '../../../images/shareIcon.svg';
 
 export default function RecipeDoneCard() {
-  // const [storageInProgress, setStorageInProgress] = useState([]);
+  const [storageInProgress, setStorageInProgress] = useState([]);
   const [drinkFilter, setDrinkfilter] = useState([]);
   const [mealFilter, setMealFilter] = useState([]);
   const [mapArray, setMapArray] = useState([]);
-  const [doneRecipe, setDoneRecipe] = useLocalStorage('doneRecipe', []);
-  // const location = useLocation();
+  const [doneRecipe, setDoneRecipe] = useLocalStorage('doneRecipes', []);
+  const [show, setShow] = useState(false);
+  const location = useLocation();
   const FIFTY_THOUSAND = 50000;
-  // useEffect(() => {
-  //   setStorageInProgress(
-  //     Object.keys({
-  //       ...JSON.parse(localStorage.getItem('inProgressRecipes')).meal,
-  //       ...JSON.parse(localStorage.getItem('inProgressRecipes')).cocktails,
-  //     }),
-  //   );
-  // }, []);
 
-  // useEffect(() => {
-  //   let newArray = [];
-  //   storageInProgress
-  //     .forEach((id) => requestById(id)
-  //       .then((values) => {
-  //         newArray = [...newArray, values];
-  //         setDoneRecipe(newArray);
-  //       }));
-  //   console.log(location.pathname);
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [storageInProgress]);
+  useEffect(() => {
+    const MEALS = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
+    const COCKTAILS = JSON.parse(localStorage.getItem('inProgressRecipes')) || [];
+    setStorageInProgress(
+      Object.keys({
+        ...MEALS.meals,
+        ...COCKTAILS.cocktails,
+      }),
+    );
+  }, []);
+
+  useEffect(() => {
+    let newArray = [];
+    storageInProgress
+      .forEach((id) => doneRecipeManger(id)
+        .then((values) => {
+          newArray = [...newArray, values];
+          setDoneRecipe(newArray);
+        }));
+    console.log(location.pathname);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [storageInProgress]);
 
   useEffect(() => {
     const handleMap = () => {
@@ -51,97 +58,136 @@ export default function RecipeDoneCard() {
     setMealFilter(doneRecipe.filter((value) => value.id > FIFTY_THOUSAND));
   };
 
-  return mapArray.length > 0
-    ? (
-      <Container>
-        <Button
-          data-testid="filter-by-all-btn"
-          onClick={ () => {
-            setMealFilter([]);
-            setDrinkfilter([]);
-          } }
-        >
-          All
+  const copyLink = (url, id) => {
+    console.log(url);
+    let urlCopy = window.location.href;
+    switch (url) {
+    case 'food':
+      urlCopy = urlCopy.replace('/done-recipes', `/foods/${id}`);
+      break;
+    case 'drink':
+      urlCopy = urlCopy.replace('/done-recipes', `/drinks/${id}`);
+      break;
+    default:
+      break;
+    }
+    copy(urlCopy);
+    setShow(true);
+  };
 
-        </Button>
-        <Button
-          data-testid="filter-by-food-btn"
-          onClick={ handleFilters }
-        >
-          Food
+  return (
+    <Container>
+      {show ? (
+        <Alert variant="success" onClose={ () => setShow(false) } dismissible>
+          <Alert.Heading>Link copied!</Alert.Heading>
+        </Alert>
+      ) : null}
+      <Button
+        data-testid="filter-by-all-btn"
+        onClick={ () => {
+          setMealFilter([]);
+          setDrinkfilter([]);
+        } }
+      >
+        All
 
-        </Button>
-        <Button
-          onClick={
-            () => setDrinkfilter(doneRecipe.filter((value) => value.id < FIFTY_THOUSAND))
-          }
-          data-testid="filter-by-drink-btn"
-        >
-          Drinks
+      </Button>
+      <Button
+        data-testid="filter-by-food-btn"
+        onClick={ handleFilters }
+      >
+        Food
 
-        </Button>
-        <CardGroup>
-          <Row md={ 2 } className="g-4">
-            { mapArray
-              .map(({
-                image,
-                area,
-                name,
-                date,
-                tags,
-                id,
-                route,
-                strAlcoholic,
-              }, index) => (
-                <Container key={ index }>
-                  <Col
-                    data-testid={ `${index}-recipe-card` }
-                  >
-                    <Card>
-                      <a href={ `${route}/${id}` }>
-                        <Card.Img
-                          variant="top"
-                          src={ image }
-                          data-testid={ `${index}-horizontal-image` }
-                        />
-                        <Card.Title
-                          data-testid={ `${index}-horizontal-name` }
-                        >
-                          {name}
+      </Button>
+      <Button
+        onClick={
+          () => setDrinkfilter(doneRecipe.filter((value) => value.id < FIFTY_THOUSAND))
+        }
+        data-testid="filter-by-drink-btn"
+      >
+        Drinks
 
-                        </Card.Title>
-                      </a>
-                      <Card.Body>
-                        <Card.Text
-                          data-testid={ `${index}-horizontal-top-text` }
-                        >
-                          {strAlcoholic && <span>Alcoholic</span>}
-                          {area}
-                        </Card.Text>
-                        <Card.Text
-                          data-testid={ `${index}-horizontal-done-date` }
-                        >
-                          {date}
+      </Button>
+      { mapArray.length > 0
+        ? (
+          <CardGroup>
+            <Row md={ 2 } className="g-4">
+              { mapArray
+                .map(({
+                  image,
+                  nationality,
+                  category,
+                  name,
+                  doneDate,
+                  id,
+                  tags,
+                  type,
+                  alcoholicOrNot,
+                }, index) => (
+                  <Container key={ index }>
+                    <Col
+                      data-testid={ `${index}-recipe-card` }
+                    >
+                      <Card>
+                        <a href={ `/${type}s/${id}` }>
+                          <Card.Img
+                            variant="top"
+                            src={ image }
+                            data-testid={ `${index}-horizontal-image` }
+                          />
+                          <Card.Title
+                            data-testid={ `${index}-horizontal-name` }
+                          >
+                            {name}
 
-                        </Card.Text>
-                        <Button data-testid={ `${index}-horizontal-share-btn` } />
-                        <span
-                          data-testid={ `${index}-${tags}-horizontal-tag` }
-                        >
-                          {tags}
+                          </Card.Title>
+                        </a>
+                        <Card.Body>
+                          <img
+                            src={ ShareIcons }
+                            alt="Share recipe"
+                            onClick={ () => copyLink(type, id) }
+                            data-testid={ `${index}-horizontal-share-btn` }
+                            aria-hidden="true"
+                            style={ { marginRight: '10px', cursor: 'pointer' } }
+                          />
+                          <Card.Text
+                            data-testid={ `${index}-horizontal-top-text` }
+                          >
+                            {alcoholicOrNot && <span>Alcoholic</span>}
+                            {nationality}
+                            {' '}
+                            -
+                            {' '}
+                            {category}
+                          </Card.Text>
+                          <Card.Text
+                            data-testid={ `${index}-horizontal-done-date` }
+                          >
+                            {doneDate}
 
-                        </span>
+                          </Card.Text>
+                          {tags ? tags.map((tag, ind) => (
+                            <span
+                              style={ { display: 'inline-block', marginRight: '3px' } }
+                              key={ ind }
+                              data-testid={ `${index}-${tag}-horizontal-tag` }
+                            >
+                              {tag}
 
-                      </Card.Body>
-                    </Card>
-                  </Col>
-                </Container>
-              )) }
-          </Row>
-        </CardGroup>
-      </Container>
-    )
-    : (
-      <h1>sem receitas Feitas</h1>
-    );
+                            </span>
+                          )) : ''}
+
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                  </Container>
+                )) }
+            </Row>
+          </CardGroup>
+        ) : (
+          <h1>sem receitas Feitas</h1>
+        )}
+    </Container>
+  );
 }
