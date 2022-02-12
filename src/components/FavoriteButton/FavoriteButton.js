@@ -4,7 +4,7 @@ import AppContext from '../../context/AppContext';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
-function FavoriteButton({ recipe }) {
+function FavoriteButton({ recipe, dataTestId }) {
   let currentRecipe = {};
   const recipeName = Object.values(recipe)[1];
   const recipeId = Object.keys(recipe)[0];
@@ -33,8 +33,10 @@ function FavoriteButton({ recipe }) {
   } else if (recipeName === 'food' || recipeName === 'drink') {
     currentRecipe = recipe;
   }
+
   const [stateHeart, setStateHeart] = useState(false);
-  const [favList, setFavList] = useState();
+  const [favList, setFavList] = useState([]);
+
   useEffect(() => {
     const idType = Object.keys(recipe)[0];
     function checkFavoriteList() {
@@ -56,6 +58,7 @@ function FavoriteButton({ recipe }) {
     if (stateHeart) {
       const indexFav = favList.findIndex((element) => (
         element.id === currentRecipe.id));
+      console.log(indexFav);
       favList.splice(indexFav, 1);
       localStorage.setItem('favoriteRecipes', JSON.stringify(favList));
       setFavoriteList(favList);
@@ -67,9 +70,10 @@ function FavoriteButton({ recipe }) {
       setStateHeart(true);
     }
   }
+
   return (
     <img
-      data-testid="favorite-btn"
+      data-testid={ dataTestId }
       src={ stateHeart ? blackHeartIcon : whiteHeartIcon }
       alt="fav button"
       onClick={ handleFavoriteClick }
@@ -80,6 +84,7 @@ function FavoriteButton({ recipe }) {
 
 FavoriteButton.propTypes = {
   recipe: PropType.objectOf(PropType.string).isRequired,
+  dataTestId: PropType.string.isRequired,
 };
 
 export default FavoriteButton;

@@ -55,7 +55,7 @@ function CardDetailsandProgress({
           aria-hidden="true"
           style={ { marginRight: '10px', cursor: 'pointer' } }
         />
-        <FavoriteButton recipe={ recipe } />
+        <FavoriteButton dataTestId="favorite-btn" recipe={ recipe } />
       </div>
       <h1 data-testid={ dataTestIdTitle }>{title}</h1>
       <p data-testid={ dataTestIdCategory }>{`${category} - ${alcoholicOrNot}`}</p>

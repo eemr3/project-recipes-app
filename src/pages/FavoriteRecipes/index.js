@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import copy from 'clipboard-copy';
+import { Alert } from 'react-bootstrap';
 import Header from '../../components/Header/Header';
-import { mockfavorites } from '../../services/requestsApi';
+import ShareIcons from '../../images/shareIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 import './FavoriteRecipes.css';
 
@@ -9,6 +12,7 @@ function FavoriteRecipes() {
   const [drinkFilter, setDrinkfilter] = useState([]);
   const [mealFilter, setMealFilter] = useState([]);
   const [mapArray, setMapArray] = useState([]);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     const handleMap = () => {
@@ -24,10 +28,8 @@ function FavoriteRecipes() {
   }, [mapArray, mealFilter, drinkFilter, arrayFavorites]);
 
   useEffect(() => {
-    mockfavorites();
-    setArrayFavorites(
-      JSON.parse(localStorage.getItem('favoriteRecipe')),
-    );
+    const favorite = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    setArrayFavorites(favorite);
   }, []);
 
   const handleFilters = () => {
@@ -35,8 +37,35 @@ function FavoriteRecipes() {
     setMealFilter(arrayFavorites.filter((value) => value.type === 'comida'));
   };
 
+  const copyLink = (url, id) => {
+    let urlCopy = window.location.href;
+    switch (url) {
+    case 'food':
+      urlCopy = urlCopy.replace('/favorite-recipes', `/foods/${id}`);
+      break;
+    case 'drink':
+      urlCopy = urlCopy.replace('/favorite-recipes', `/drinks/${id}`);
+      break;
+    default:
+      break;
+    }
+    copy(urlCopy);
+    setShow(true);
+  };
+
+  const handleFavorite = (id) => {
+    const resultFavorite = arrayFavorites.filter((fav) => fav.id !== id);
+    setArrayFavorites(resultFavorite);
+    localStorage.setItem('favoriteRecipes', JSON.stringify(resultFavorite));
+  };
+
   return (
     <div>
+      {show ? (
+        <Alert variant="success" onClose={ () => setShow(false) } dismissible>
+          <Alert.Heading>Link copied!</Alert.Heading>
+        </Alert>
+      ) : null}
       <Header
         classNameContent="header-FavoriteRecipes-content"
         name="Favorite Recipes"
@@ -82,17 +111,17 @@ function FavoriteRecipes() {
             mapArray.map(({
               image,
               name,
-              area,
+              nationality,
               id,
               category,
               type,
               alcoholicOrNot,
             }, index) => (
               <div key={ index } data-testid={ `${index}-recipe-card` }>
-                <a href={ `/${type}/${id}` }>
+                <a href={ `/${type}s/${id}` }>
                   <img
-                    data-testid={ `${index}-horizontal-image ` }
-                    style={ { width: '300px' } }
+                    data-testid={ `${index}-horizontal-image` }
+                    style={ { width: '290px' } }
                     src={ image }
                     alt="recipe-favorite"
                   />
@@ -102,9 +131,25 @@ function FavoriteRecipes() {
                   data-testid={ `${index}-horizontal-top-text` }
                 >
                   {
-                    alcoholicOrNot.length ? alcoholicOrNot : `${area} - ${category}`
+                    alcoholicOrNot || `${nationality} - ${category}`
                   }
                 </span>
+                <img
+                  src={ ShareIcons }
+                  alt="Share recipe"
+                  onClick={ () => copyLink(type, id) }
+                  data-testid={ `${index}-horizontal-share-btn` }
+                  aria-hidden="true"
+                  style={ { marginLeft: '10px', cursor: 'pointer' } }
+                />
+                <img
+                  src={ blackHeartIcon }
+                  alt="Share recipe"
+                  onClick={ () => handleFavorite(id) }
+                  aria-hidden="true"
+                  style={ { marginLeft: '10px', cursor: 'pointer' } }
+                  data-testid={ `${index}-horizontal-favorite-btn` }
+                />
               </div>
             ))
           ) : (

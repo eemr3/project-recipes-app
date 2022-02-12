@@ -94,101 +94,58 @@ export const requestSurprise = async (url) => {
   return object;
 };
 
-export const requestById = async (id) => {
-  const now = new Date();
-  const date = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
-  const MAGIC = 50000;
+// export const requestById = async (id) => {
+//   const now = new Date();
+//   const date = { data: `${now.getDate()}/${now.getMonth() + 1}/${now.getFullYear()}` };
+//   const MAGIC = 50000;
 
-  if (Number(id) > MAGIC) {
-    try {
-      const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-      const object1 = await response1.json();
-      // console.log(object1);
-      const datameals = object1.meals !== null ? object1.meals : [];
-      // console.log(meals);
-      const newMeals = { ...datameals[0], ...date };
-      const { idMeal, strArea, strCategory, strMealThumb, strTags, strMeal } = newMeals;
+//   if (Number(id) > MAGIC) {
+//     try {
+//       const response1 = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+//       const object1 = await response1.json();
+//       // console.log(object1);
+//       const datameals = object1.meals !== null ? object1.meals : [];
+//       // console.log(meals);
+//       const newMeals = { ...datameals[0], ...date };
+//       const { idMeal, strArea, strCategory, strMealThumb, strTags, strMeal } = newMeals;
 
-      const mealObject = {
-        doneDate: newMeals.data,
-        id: idMeal,
-        image: strMealThumb,
-        name: strMeal,
-        tags: strTags !== null ? strTags.split(',') : [],
-        nationality: strArea,
-        category: strCategory,
-        type: 'food',
-      };
-      return mealObject;
-    } catch (error) {
-      console.log(error);
-    }
-  }
+//       const mealObject = {
+//         doneDate: newMeals.data,
+//         id: idMeal,
+//         image: strMealThumb,
+//         name: strMeal,
+//         tags: strTags !== null ? strTags.split(',') : [],
+//         nationality: strArea,
+//         category: strCategory,
+//         type: 'food',
+//       };
+//       return mealObject;
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   }
 
-  try {
-    const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-    const object2 = await response2.json();
-    const { drinks } = object2;
-    const newDrinks = { ...drinks[0], ...date };
-    const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
-    const drinkObject = {
-      doneDate: newDrinks.data,
-      id: idDrink,
-      image: strDrinkThumb,
-      tags: strTags !== null ? strTags.split(',') : [],
-      name: strDrink,
-      alcoholicOrNot: strAlcoholic,
-      type: 'drink',
-    };
-    return drinkObject;
-  } catch (error) {
-    console.log(error);
-  }
-};
+//   try {
+//     const response2 = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+//     const object2 = await response2.json();
+//     const { drinks } = object2;
+//     const newDrinks = { ...drinks[0], ...date };
+//     const { idDrink, strDrinkThumb, strTags, strDrink, strAlcoholic } = newDrinks;
+//     const drinkObject = {
+//       doneDate: newDrinks.data,
+//       id: idDrink,
+//       image: strDrinkThumb,
+//       tags: strTags !== null ? strTags.split(',') : [],
+//       name: strDrink,
+//       alcoholicOrNot: strAlcoholic,
+//       type: 'drink',
+//     };
+//     return drinkObject;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
-export const mockfavorites = () => {
-  const object = [
-    { alcoholicOrNot: '',
-      area: 'Croatian',
-      category: 'Side',
-      id: '53060',
-      image: 'https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg',
-      name: 'Burek',
-      type: 'foods',
-    },
-
-    {
-      alcoholicOrNot: '',
-      area: 'Turkish',
-      category: 'Side',
-      id: '52977',
-      image: 'https://www.themealdb.com/images/media/meals/58oia61564916529.jpg',
-      name: 'Corba',
-      type: 'foods',
-    },
-
-    {
-      alcoholicOrNot: 'Alcoholic',
-      area: '',
-      category: 'Shot',
-      id: '14229',
-      image: 'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
-      name: '747',
-      type: 'drinks',
-    },
-
-    { alcoholicOrNot: 'Alcoholic',
-      area: '',
-      category: 'Shot',
-      id: '14229',
-      image: 'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
-      name: '747',
-      type: 'drinks',
-    },
-  ];
-
-  localStorage.setItem('favoriteRecipe', JSON.stringify(object));
-};
 export const requestDetailsDrinks = async (idDrink) => {
   const URL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`;
   try {

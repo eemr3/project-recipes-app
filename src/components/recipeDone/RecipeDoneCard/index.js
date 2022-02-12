@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import { CardGroup, Container, Row, Card, Col, Button, Alert } from 'react-bootstrap';
 import useLocalStorage from '../../../context/hooks/useLocalStorage';
@@ -129,7 +129,7 @@ export default function RecipeDoneCard() {
                       data-testid={ `${index}-recipe-card` }
                     >
                       <Card>
-                        <a href={ `/${type}s/${id}` }>
+                        <Link to={ `/${type}s/${id}` }>
                           <Card.Img
                             variant="top"
                             src={ image }
@@ -141,7 +141,7 @@ export default function RecipeDoneCard() {
                             {name}
 
                           </Card.Title>
-                        </a>
+                        </Link>
                         <Card.Body>
                           <img
                             src={ ShareIcons }

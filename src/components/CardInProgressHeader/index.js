@@ -42,7 +42,7 @@ function CardInProgressHeader({
           aria-hidden="true"
         />
 
-        <FavoriteButton recipe={ recipe } />
+        <FavoriteButton dataTestId="favorite-btn" recipe={ recipe } />
       </div>
     </header>);
 }
