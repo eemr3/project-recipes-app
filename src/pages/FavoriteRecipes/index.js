@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap';
 import Header from '../../components/Header/Header';
 import ShareIcons from '../../images/shareIcon.svg';
@@ -33,8 +34,9 @@ function FavoriteRecipes() {
   }, []);
 
   const handleFilters = () => {
+    console.log('chegou aqui');
     setDrinkfilter([]);
-    setMealFilter(arrayFavorites.filter((value) => value.type === 'comida'));
+    setMealFilter(arrayFavorites.filter((value) => value.type === 'food'));
   };
 
   const copyLink = (url, id) => {
@@ -96,7 +98,7 @@ function FavoriteRecipes() {
         <button
           onClick={
             () => setDrinkfilter(arrayFavorites
-              .filter((value) => value.type === 'bebida'))
+              .filter((value) => value.type === 'drink'))
           }
           data-testid="filter-by-drink-btn"
           type="button"
@@ -118,15 +120,17 @@ function FavoriteRecipes() {
               alcoholicOrNot,
             }, index) => (
               <div key={ index } data-testid={ `${index}-recipe-card` }>
-                <a href={ `/${type}s/${id}` }>
+                <Link to={ `/${type}s/${id}` }>
                   <img
                     data-testid={ `${index}-horizontal-image` }
                     style={ { width: '290px' } }
                     src={ image }
                     alt="recipe-favorite"
                   />
-                </a>
-                <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+                </Link>
+                <Link to={ `/${type}s/${id}` }>
+                  <h2 data-testid={ `${index}-horizontal-name` }>{name}</h2>
+                </Link>
                 <span
                   data-testid={ `${index}-horizontal-top-text` }
                 >
