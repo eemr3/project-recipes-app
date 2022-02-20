@@ -71,7 +71,7 @@ Acesse no navegador
     <td align="center"><a href=https://github.com/Lucas-Fer"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/81340180?v=4" width="100px;" alt=""/><br /><sub><b>Lucas Fernandes</b></sub></a><br /><a href="https://github.com/Lucas-Fer" title="Lucas-Fer"></a></td>
     <td align="center"><a href="https://github.com/esaumatias"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/88900701?v=4" width="100px;" alt=""/><br /><sub><b>Esau Matias</b></sub></a><br /><a href="https://github.com/esaumatias" title="esaumatias"></a></td>
     <td align="center"><a href="https://github.com/GBLBORGES"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/86524092?v=4" width="100px;" alt=""/><br /><sub><b>Robson Marques</b></sub></a><br /><a href="https://github.com/GBLBORGES/" title="GBLBORGES"></a></td>
-    <td align="center"><a href="https://github.com/eemr3"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/42968718?v=4" width="100px;" alt=""/><br /><sub><b>Claudio Orlandi</b></sub></a><br /><a href="https://github.com/eemr3/" title="eemr3">🚀</a></td>
+    <td align="center"><a href="https://github.com/eemr3"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/42968718?v=4" width="100px;" alt=""/><br /><sub><b>Claudio Orlandi</b></sub></a><br /><a href="https://github.com/eemr3/" title="eemr3"></a></td>
   </tr>
 </table>
 
