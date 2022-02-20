@@ -48,7 +48,7 @@ function ListIngredientsInProgress({
             type="checkbox"
             name={ `${igredient},${measure}` }
             id={ `${index}-${igredient}` }
-            defaultChecked={ checkThrough }
+            checked={ checkThrough }
           />
           {igredient}
           {' '}
